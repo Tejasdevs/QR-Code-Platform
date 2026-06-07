@@ -1,4 +1,3 @@
-/** src/pages/dashboard.js */
 import { setupLayoutEvents } from '../components/layout.js';
 import { auth, qrData, historyData } from '../utils/storage.js';
 
@@ -10,17 +9,14 @@ export const DashboardPage = {
         const qrs     = qrData.getAll();
         const history = historyData.getAll().slice(0, 5);
 
-        // Populate greeting
         const nameEl = document.getElementById('user-name');
         if (nameEl) nameEl.textContent = user.name;
 
-        // Stats
         document.getElementById('stat-total').textContent    = qrs.length;
         document.getElementById('stat-url').textContent      = qrs.filter(q => q.type === 'URL').length;
         document.getElementById('stat-whatsapp').textContent = qrs.filter(q => q.type === 'WhatsApp').length;
         document.getElementById('stat-wifi').textContent     = qrs.filter(q => q.type === 'WiFi').length;
 
-        // Recent QRs
         const recentEl = document.getElementById('recent-qrs');
         if (qrs.length > 0) {
             recentEl.innerHTML = qrs.slice(0, 4).map(qr => `
@@ -39,7 +35,6 @@ export const DashboardPage = {
             `).join('');
         }
 
-        // Activity feed
         const activityEl = document.getElementById('activity-feed');
         if (history.length > 0) {
             activityEl.innerHTML = history.map(item => `

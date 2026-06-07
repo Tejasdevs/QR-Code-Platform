@@ -1,18 +1,12 @@
-/**
- * src/components/layout.js
- * Handles sidebar events: logout, mobile menu toggle, user info population.
- */
 import { auth } from '../utils/storage.js';
 
 export const setupLayoutEvents = () => {
-    // Populate user info
     const user = auth.getCurrentUser() || { name: 'User', email: '' };
     const avatarEl = document.getElementById('sidebar-avatar');
     const nameEl   = document.getElementById('sidebar-name');
     if (avatarEl) avatarEl.textContent = user.name.charAt(0).toUpperCase();
     if (nameEl)   nameEl.textContent   = user.name;
 
-    // Logout buttons
     ['logout-btn', 'mobile-logout-btn'].forEach(id => {
         const btn = document.getElementById(id);
         if (btn) btn.addEventListener('click', (e) => {
@@ -22,7 +16,6 @@ export const setupLayoutEvents = () => {
         });
     });
 
-    // Mobile menu
     const mobileMenuBtn   = document.getElementById('mobile-menu-btn');
     const closeMobileBtn  = document.getElementById('close-menu-btn');
     const mobileMenu      = document.getElementById('mobile-menu');

@@ -1,8 +1,6 @@
-/** src/pages/generator.js */
 import { setupLayoutEvents } from '../components/layout.js';
 import { qrData, settingsData } from '../utils/storage.js';
 
-// Input templates per QR type (pure JS strings injected into #dynamic-inputs)
 const inputTemplates = {
     URL: `
         <div>
@@ -89,31 +87,26 @@ export const GeneratorPage = {
         const saveBtn     = document.getElementById('save-qr-btn');
         const qrContainer = document.getElementById('qrcode');
 
-        // Apply saved default color or white for dark theme contrast
         colorPicker.value = settings.defaultColor || '#ffffff';
         colorText.value   = settings.defaultColor || '#ffffff';
 
         let currentQRCode    = null;
         let currentDataStr   = '';
 
-        // Render default inputs
         const renderInputs = (type) => {
             dynamicInputs.innerHTML = inputTemplates[type] || '';
         };
         renderInputs('URL');
 
-        // Type change
         document.querySelectorAll('input[name="qr_type"]').forEach(radio => {
             radio.addEventListener('change', e => renderInputs(e.target.value));
         });
 
-        // Color sync
         colorPicker.addEventListener('input', e => colorText.value = e.target.value);
         colorText.addEventListener('input',   e => { if (/^#[0-9a-fA-F]{6}$/.test(e.target.value)) colorPicker.value = e.target.value; });
         bgPicker.addEventListener('input',    e => bgText.value    = e.target.value);
         bgText.addEventListener('input',      e => { if (/^#[0-9a-fA-F]{6}$/.test(e.target.value)) bgPicker.value    = e.target.value; });
 
-        // Generate
         generateBtn.addEventListener('click', () => {
             const type = document.querySelector('input[name="qr_type"]:checked').value;
             currentDataStr = buildDataString(type);
@@ -139,7 +132,6 @@ export const GeneratorPage = {
             document.getElementById('save-success').classList.add('hidden');
         });
 
-        // Save
         saveBtn.addEventListener('click', () => {
             const type   = document.querySelector('input[name="qr_type"]:checked').value;
             const nameEl = document.getElementById('input-name');
@@ -147,7 +139,6 @@ export const GeneratorPage = {
             document.getElementById('save-success').classList.remove('hidden');
         });
 
-        // Download PNG
         document.getElementById('download-png').addEventListener('click', () => {
             const canvas = qrContainer.querySelector('canvas');
             if (canvas) {

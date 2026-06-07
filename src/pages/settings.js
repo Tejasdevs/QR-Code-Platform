@@ -1,4 +1,3 @@
-/** src/pages/settings.js */
 import { setupLayoutEvents } from '../components/layout.js';
 import { settingsData } from '../utils/storage.js';
 
@@ -13,7 +12,6 @@ export const SettingsPage = {
         const msgEl       = document.getElementById('settings-msg');
         const qrPreview   = document.getElementById('setting-preview-qr');
 
-        // Apply saved values
         colorPicker.value = settings.defaultColor || '#ffffff';
         colorText.value   = settings.defaultColor || '#ffffff';
         qrPreview.style.color = colorPicker.value;
@@ -34,7 +32,6 @@ export const SettingsPage = {
             showMessage('Settings saved automatically.');
         };
 
-        // Sync color inputs & auto-save
         colorPicker.addEventListener('input', e => {
             colorText.value = e.target.value;
             qrPreview.style.color = e.target.value;
@@ -49,12 +46,10 @@ export const SettingsPage = {
             }
         });
 
-        // Toggle auto-save
         emailToggle.addEventListener('change', () => {
             saveSettings();
         });
 
-        // Clear all data
         document.getElementById('clear-data-btn').addEventListener('click', () => {
             if (confirm('This will delete ALL your QR codes and history. Are you sure?')) {
                 localStorage.removeItem('qrflow_qrs');

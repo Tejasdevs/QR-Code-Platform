@@ -1,8 +1,3 @@
-/**
- * LocalStorage wrapper for the application.
- * Mocks future API calls.
- */
-
 const PREFIX = 'qrflow_';
 
 export const storage = {
@@ -27,7 +22,6 @@ export const storage = {
     }
 };
 
-// Auth Actions
 export const auth = {
     signup: (user) => {
         const users = storage.get('users', []);
@@ -58,7 +52,6 @@ export const auth = {
     }
 };
 
-// QR Data Actions
 export const qrData = {
     getAll: () => storage.get('qrs', []),
     save: (qr) => {
@@ -66,10 +59,7 @@ export const qrData = {
         const newQR = { ...qr, id: Date.now().toString(), createdAt: new Date().toISOString() };
         qrs.unshift(newQR);
         storage.set('qrs', qrs);
-        
-        // Log to history
         historyData.add(`Generated a new ${qr.type} QR code`);
-        
         return newQR;
     },
     delete: (id) => {
@@ -89,19 +79,16 @@ export const qrData = {
     }
 };
 
-// History Actions
 export const historyData = {
     getAll: () => storage.get('history', []),
     add: (action) => {
         const history = storage.get('history', []);
         history.unshift({ action, timestamp: new Date().toISOString() });
-        // Keep only last 50
         if (history.length > 50) history.pop();
         storage.set('history', history);
     }
 };
 
-// Settings Actions
 export const settingsData = {
     get: () => storage.get('settings', { theme: 'light', defaultColor: '#000000', defaultSize: 256 }),
     save: (settings) => storage.set('settings', settings)

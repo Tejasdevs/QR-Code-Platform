@@ -1,4 +1,3 @@
-/** src/pages/my-qrs.js */
 import { setupLayoutEvents } from '../components/layout.js';
 import { qrData } from '../utils/storage.js';
 
@@ -37,7 +36,6 @@ const renderGrid = (qrs) => {
         </div>
     `).join('');
 
-    // Delete handlers
     grid.querySelectorAll('.delete-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             if (confirm('Delete this QR code permanently?')) {

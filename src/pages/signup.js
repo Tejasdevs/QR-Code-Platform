@@ -1,4 +1,3 @@
-/** src/pages/signup.js */
 import { auth } from '../utils/storage.js';
 
 export const SignupPage = {

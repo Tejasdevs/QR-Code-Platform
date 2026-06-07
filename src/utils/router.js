@@ -1,7 +1,3 @@
-/**
- * Hash-based SPA Router
- * Fetches separate HTML view files and injects them into the DOM.
- */
 export class Router {
     constructor(routes) {
         this.routes = routes;
@@ -30,7 +26,6 @@ export class Router {
             return;
         }
 
-        // Show loading spinner
         this.rootElement.innerHTML = `
             <div class="flex items-center justify-center min-h-screen bg-transparent">
                 <div class="spinner"></div>
@@ -38,7 +33,6 @@ export class Router {
 
         try {
             if (route.layout) {
-                // Fetch layout shell + page content simultaneously
                 const [layoutRes, pageRes] = await Promise.all([
                     fetch('./src/views/layout.html'),
                     fetch(`./src/views/${route.view}.html`)
@@ -55,11 +49,9 @@ export class Router {
                 const slot = document.getElementById('page-content');
                 if (slot) slot.innerHTML = pageHtml;
 
-                // Highlight active nav link
                 this.setActiveNav(path);
 
             } else {
-                // Guest pages — inject view directly
                 const res = await fetch(`./src/views/${route.view}.html`);
                 if (!res.ok) throw new Error(`Failed to load view ${route.view}: ${res.status}`);
                 this.rootElement.innerHTML = await res.text();

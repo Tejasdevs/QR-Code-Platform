@@ -1,4 +1,3 @@
-/** src/pages/login.js — Form submission logic only */
 import { auth } from '../utils/storage.js';
 
 export const LoginPage = {

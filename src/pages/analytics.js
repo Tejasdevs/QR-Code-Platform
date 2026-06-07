@@ -1,4 +1,3 @@
-/** src/pages/analytics.js */
 import { setupLayoutEvents } from '../components/layout.js';
 import { qrData } from '../utils/storage.js';
 
@@ -7,24 +6,21 @@ export const AnalyticsPage = {
         setupLayoutEvents();
 
         const qrs       = qrData.getAll();
-        const textColor = '#94a3b8'; // Slate 400 for premium dark theme
+        const textColor = '#94a3b8';
         const gridColor = 'rgba(255, 255, 255, 0.05)';
 
         Chart.defaults.color = textColor;
         Chart.defaults.font.family = 'Inter, sans-serif';
 
-        // Destroy existing charts to prevent memory leaks or errors on hot reload
         if (window.scansChartInstance) window.scansChartInstance.destroy();
         if (window.deviceChartInstance) window.deviceChartInstance.destroy();
 
-        // 1. Scans Chart (Line)
         const days = Array.from({ length: 7 }, (_, i) => {
             const d = new Date();
             d.setDate(d.getDate() - (6 - i));
             return d.toLocaleDateString('en-US', { weekday: 'short' });
         });
 
-        // Mock data
         const scanData = [12, 19, 15, 25, 22, 30, 45 + (qrs.length * 2)];
 
         const ctxScans = document.getElementById('scansChart');
@@ -36,7 +32,7 @@ export const AnalyticsPage = {
                     datasets: [{ 
                         label: 'Total Scans', 
                         data: scanData, 
-                        borderColor: '#60a5fa', // Blue 400
+                        borderColor: '#60a5fa',
                         backgroundColor: 'rgba(96, 165, 250, 0.1)', 
                         borderWidth: 2, 
                         fill: true, 
@@ -61,7 +57,6 @@ export const AnalyticsPage = {
             });
         }
 
-        // 2. Device Types (Doughnut)
         const ctxDevice = document.getElementById('deviceChart');
         if (ctxDevice) {
             window.deviceChartInstance = new Chart(ctxDevice, {
@@ -86,13 +81,11 @@ export const AnalyticsPage = {
             });
         }
 
-        // 3. Populate Top Performing QR Codes Table
         const tbody = document.getElementById('top-qrs-tbody');
         if (tbody) {
             if (qrs.length === 0) {
                 tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 text-slate-500">No QR codes generated yet.</td></tr>`;
             } else {
-                // Mock scans based on string length to simulate variety
                 const sortedQRs = [...qrs].map(qr => ({
                     ...qr,
                     scans: Math.floor(Math.random() * 200) + 10
