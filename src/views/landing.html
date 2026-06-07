@@ -1,0 +1,135 @@
+<!-- src/views/landing.html -->
+<div class="min-h-screen bg-transparent flex flex-col transition-colors duration-300">
+
+    <!-- Navigation -->
+    <nav class="glass-nav fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <i class="ph-fill ph-qr-code text-3xl text-blue-400"></i>
+                    <span class="font-bold text-xl tracking-tight text-white">QRFlow</span>
+                </div>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#features" class="text-slate-300 hover:text-blue-400 transition-colors">Features</a>
+                    <a href="#how-it-works" class="text-slate-300 hover:text-blue-400 transition-colors">How it works</a>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <a href="#/login" class="text-slate-300 hover:text-blue-400 font-medium transition-colors px-3 py-2">Log in</a>
+                    <a href="#/signup" class="premium-btn">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <main class="flex-grow pt-24 pb-12 relative overflow-hidden flex flex-col items-center justify-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 pt-20">
+            <div class="inline-flex items-center gap-2 bg-blue-900/30 text-blue-400 px-4 py-1.5 rounded-full text-sm font-medium mb-6 border border-blue-500/30 backdrop-blur-md">
+                <i class="ph ph-sparkle text-pink-400"></i> Now with Analytics Dashboard
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 leading-tight">
+                <span class="block text-white drop-shadow-lg">Create dynamic</span>
+                <span class="block text-gradient">QR Codes in seconds.</span>
+            </h1>
+            <p class="mt-6 max-w-2xl mx-auto text-xl text-slate-400 mb-10">
+                The premium platform to generate, customize, track, and manage your QR codes all in one beautiful place.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-5">
+                <a href="#/signup" class="premium-btn text-lg px-8 py-4">
+                    Start for free <i class="ph ph-arrow-right"></i>
+                </a>
+                <a href="#features" class="premium-btn-secondary text-lg px-8 py-4">
+                    View Features
+                </a>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex flex-wrap justify-center gap-10 mt-20">
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold text-white text-gradient">50K+</div>
+                    <div class="text-sm text-slate-400 mt-2 tracking-wide uppercase font-semibold">QR Codes Generated</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold text-white text-gradient">12K+</div>
+                    <div class="text-sm text-slate-400 mt-2 tracking-wide uppercase font-semibold">Happy Users</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-4xl font-extrabold text-white text-gradient">99.9%</div>
+                    <div class="text-sm text-slate-400 mt-2 tracking-wide uppercase font-semibold">Uptime</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Features -->
+    <section id="features" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white tracking-tight">Everything you need</h2>
+                <p class="mt-4 text-lg text-slate-400">Powerful features to manage your QR code campaigns.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="glass-card p-8 rounded-3xl hover:border-blue-500/30 transition-all hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-blue-900/40 text-blue-400 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-blue-500/20 group-hover:scale-110 transition-transform"><i class="ph ph-palette"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Full Customization</h3>
+                    <p class="text-slate-400 leading-relaxed">Change colors and tweak the design to match your brand identity perfectly. Sleek and seamless.</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl hover:border-purple-500/30 transition-all hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-purple-900/40 text-purple-400 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-purple-500/20 group-hover:scale-110 transition-transform"><i class="ph ph-chart-bar"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">Analytics Dashboard</h3>
+                    <p class="text-slate-400 leading-relaxed">Track scans, locations, and device types with beautiful, interactive dark-themed charts.</p>
+                </div>
+                <div class="glass-card p-8 rounded-3xl hover:border-pink-500/30 transition-all hover:-translate-y-1 group">
+                    <div class="w-14 h-14 bg-pink-900/40 text-pink-400 rounded-2xl flex items-center justify-center text-2xl mb-6 shadow-lg shadow-pink-500/20 group-hover:scale-110 transition-transform"><i class="ph ph-export"></i></div>
+                    <h3 class="text-xl font-bold mb-3 text-white">High-Quality Export</h3>
+                    <p class="text-slate-400 leading-relaxed">Download your QR codes in high-resolution directly to your device for print or digital distribution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how-it-works" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white tracking-tight">How it works</h2>
+                <p class="mt-4 text-lg text-slate-400">Get your QR code live in under a minute.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+                <!-- Connectors for Desktop -->
+                <div class="hidden md:block absolute top-8 left-1/6 right-1/6 h-[2px] bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-emerald-500/20 z-0"></div>
+                
+                <div class="text-center relative z-10 glass-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-blue-600 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg shadow-blue-500/40 border border-blue-400/30 animate-float">1</div>
+                    <h3 class="text-lg font-bold text-white mb-3">Sign Up Free</h3>
+                    <p class="text-slate-400">Create an account in seconds with just your email.</p>
+                </div>
+                <div class="text-center relative z-10 glass-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-purple-600 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg shadow-purple-500/40 border border-purple-400/30 animate-float animation-delay-2000">2</div>
+                    <h3 class="text-lg font-bold text-white mb-3">Create Your QR</h3>
+                    <p class="text-slate-400">Enter your URL, text, WiFi or WhatsApp details and customize.</p>
+                </div>
+                <div class="text-center relative z-10 glass-card p-8 rounded-3xl">
+                    <div class="w-16 h-16 bg-emerald-600 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg shadow-emerald-500/40 border border-emerald-400/30 animate-float animation-delay-4000">3</div>
+                    <h3 class="text-lg font-bold text-white mb-3">Download & Share</h3>
+                    <p class="text-slate-400">Download your code and share it anywhere instantly.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-nav py-12 border-t border-white/5 relative z-10 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-2">
+                <i class="ph-fill ph-qr-code text-2xl text-blue-400"></i>
+                <span class="font-bold text-lg text-white">QRFlow</span>
+            </div>
+            <p class="text-sm text-slate-500">&copy; 2026 QRFlow Inc. All rights reserved.</p>
+            <div class="flex gap-4 text-xl">
+                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="ph ph-twitter-logo"></i></a>
+                <a href="#" class="text-slate-400 hover:text-white transition-colors"><i class="ph ph-github-logo"></i></a>
+            </div>
+        </div>
+    </footer>
+</div>

@@ -1,0 +1,100 @@
+<!-- src/views/dashboard.html -->
+<div class="max-w-6xl mx-auto space-y-8">
+
+    <!-- Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+            <h1 class="text-3xl font-bold text-white tracking-tight">
+                Welcome back, <span id="user-name" class="text-gradient">User</span>
+            </h1>
+            <p class="text-slate-400 mt-2 text-lg">Here's what's happening with your QR codes today.</p>
+        </div>
+        <a href="#/generator" class="premium-btn shrink-0">
+            <i class="ph ph-plus-circle text-lg"></i> Create QR Code
+        </a>
+    </div>
+
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="glass-card rounded-3xl p-6 hover:border-blue-500/30 transition-all hover:-translate-y-1">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Total QR Codes</p>
+                    <h3 id="stat-total" class="text-4xl font-extrabold text-white mt-3">0</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center text-2xl shadow-lg shadow-blue-500/10 border border-blue-500/20">
+                    <i class="ph ph-qr-code"></i>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card rounded-3xl p-6 hover:border-purple-500/30 transition-all hover:-translate-y-1">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm font-semibold text-slate-400 uppercase tracking-widest">Website QRs</p>
+                    <h3 id="stat-url" class="text-4xl font-extrabold text-white mt-3">0</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-purple-500/10 text-purple-400 flex items-center justify-center text-2xl shadow-lg shadow-purple-500/10 border border-purple-500/20">
+                    <i class="ph ph-link"></i>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card rounded-3xl p-6 hover:border-emerald-500/30 transition-all hover:-translate-y-1">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm font-semibold text-slate-400 uppercase tracking-widest">WhatsApp QRs</p>
+                    <h3 id="stat-whatsapp" class="text-4xl font-extrabold text-white mt-3">0</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl shadow-lg shadow-emerald-500/10 border border-emerald-500/20">
+                    <i class="ph ph-whatsapp-logo"></i>
+                </div>
+            </div>
+        </div>
+        <div class="glass-card rounded-3xl p-6 hover:border-pink-500/30 transition-all hover:-translate-y-1">
+            <div class="flex justify-between items-start">
+                <div>
+                    <p class="text-sm font-semibold text-slate-400 uppercase tracking-widest">WiFi QRs</p>
+                    <h3 id="stat-wifi" class="text-4xl font-extrabold text-white mt-3">0</h3>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center text-2xl shadow-lg shadow-pink-500/10 border border-pink-500/20">
+                    <i class="ph ph-wifi-high"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Recent QRs -->
+        <div class="lg:col-span-2 glass-card rounded-3xl p-8">
+            <div class="flex items-center justify-between mb-8">
+                <h2 class="text-xl font-bold text-white tracking-tight">Recent QR Codes</h2>
+                <a href="#/my-qrs" class="text-sm font-semibold text-blue-400 hover:text-blue-300 hover:underline transition-colors">View all</a>
+            </div>
+            <div id="recent-qrs" class="space-y-4">
+                <p class="text-slate-400 text-sm">No QR codes generated yet. <a href="#/generator" class="text-blue-400 hover:text-blue-300 hover:underline font-medium transition-colors">Create one!</a></p>
+            </div>
+        </div>
+
+        <!-- Activity Feed -->
+        <div class="glass-card rounded-3xl p-8">
+            <h2 class="text-xl font-bold text-white tracking-tight mb-8">Recent Activity</h2>
+            <div id="activity-feed" class="space-y-6">
+                <p class="text-slate-400 text-sm">No recent activity.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="relative overflow-hidden rounded-3xl p-8 shadow-2xl border border-white/10">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-600/80 to-purple-600/80 backdrop-blur-xl z-0"></div>
+        <div class="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+            <div>
+                <h3 class="text-2xl font-bold text-white tracking-tight">Ready to create a new QR code?</h3>
+                <p class="text-blue-100/80 text-base mt-2">Generate URL, text, WiFi or WhatsApp QR codes instantly.</p>
+            </div>
+            <a href="#/generator" class="shrink-0 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white px-8 py-4 rounded-2xl font-semibold transition-all border border-white/20 shadow-lg flex items-center justify-center gap-2">
+                Create QR Code <i class="ph ph-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+</div>

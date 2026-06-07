@@ -1,0 +1,41 @@
+<!-- src/views/signup.html -->
+<div class="min-h-screen flex items-center justify-center bg-transparent p-4 relative overflow-hidden transition-colors duration-300">
+    <div class="max-w-md w-full glass-card rounded-3xl overflow-hidden z-10 animate-fade-in relative border border-white/10 shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-tr from-purple-500/5 to-pink-500/5 pointer-events-none"></div>
+        <div class="p-10 relative z-10">
+            <div class="text-center mb-8">
+                <a href="#/" class="inline-flex items-center gap-2 mb-6 hover:scale-105 transition-transform">
+                    <i class="ph-fill ph-qr-code text-4xl text-blue-400 drop-shadow-md"></i>
+                    <span class="font-bold text-2xl text-white tracking-tight">QRFlow</span>
+                </a>
+                <h2 class="text-2xl font-bold text-white tracking-tight">Create your account</h2>
+                <p class="text-sm text-slate-400 mt-2">Start generating QR codes for free.</p>
+            </div>
+
+            <div id="error-msg" class="hidden mb-6 bg-red-900/40 border border-red-500/30 text-red-200 px-4 py-3 rounded-xl text-sm backdrop-blur-md shadow-lg" role="alert"></div>
+
+            <form id="signup-form" class="space-y-5">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Full Name</label>
+                    <input type="text" id="name" required autocomplete="name" class="premium-input" placeholder="John Doe">
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                    <input type="email" id="email" required autocomplete="email" class="premium-input" placeholder="you@example.com">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+                    <input type="password" id="password" required autocomplete="new-password" class="premium-input" placeholder="Min. 6 characters">
+                </div>
+                <button type="submit" class="premium-btn w-full py-3 mt-4 text-[15px]">
+                    Create Account <i class="ph ph-arrow-right text-lg"></i>
+                </button>
+            </form>
+        </div>
+        <div class="px-10 py-5 bg-black/20 border-t border-white/5 text-center relative z-10">
+            <p class="text-sm text-slate-400">
+                Already have an account? <a href="#/login" class="text-blue-400 hover:text-blue-300 hover:underline font-semibold transition-colors">Log in</a>
+            </p>
+        </div>
+    </div>
+</div>

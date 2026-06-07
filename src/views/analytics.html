@@ -1,0 +1,43 @@
+<!-- src/views/analytics.html -->
+<div class="max-w-6xl mx-auto space-y-8">
+    <div>
+        <h1 class="text-3xl font-bold text-white tracking-tight">Analytics Overview</h1>
+        <p class="text-slate-400 mt-2 text-lg">Track how your QR codes are performing.</p>
+    </div>
+
+    <!-- Chart row 1 -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="glass-card rounded-3xl p-8">
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Total Scans (Last 7 Days)</h3>
+            <div class="h-64 relative">
+                <canvas id="scansChart"></canvas>
+            </div>
+        </div>
+        <div class="glass-card rounded-3xl p-8">
+            <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Device Types</h3>
+            <div class="h-64 relative">
+                <canvas id="deviceChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart row 2 -->
+    <div class="glass-card rounded-3xl p-8">
+        <h3 class="text-sm font-bold text-slate-400 uppercase tracking-widest mb-6">Top Performing QR Codes</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b border-white/5 text-sm font-semibold text-slate-500 uppercase tracking-widest">
+                        <th class="pb-4 pl-4">QR Name</th>
+                        <th class="pb-4">Type</th>
+                        <th class="pb-4">Total Scans</th>
+                        <th class="pb-4">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="top-qrs-tbody" class="text-sm text-slate-300">
+                    <!-- Injected by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

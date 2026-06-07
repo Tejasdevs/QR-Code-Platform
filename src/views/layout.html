@@ -1,0 +1,84 @@
+<!-- src/views/layout.html -->
+<div class="flex min-h-screen bg-transparent transition-colors duration-300">
+
+    <!-- ── Sidebar (Desktop) ── -->
+    <aside class="hidden md:flex flex-col w-64 glass-nav border-r border-white/10 fixed top-0 left-0 h-full z-40">
+        <!-- Logo -->
+        <div class="h-16 flex items-center px-6 border-b border-white/5 shrink-0">
+            <i class="ph-fill ph-qr-code text-2xl text-blue-400 mr-2"></i>
+            <span class="font-bold text-xl text-white tracking-tight">QRFlow</span>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex-1 overflow-y-auto py-5 px-3 space-y-1">
+            <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 px-3">Menu</p>
+            <a href="#/dashboard" data-path="/dashboard" class="nav-link"><i class="ph-fill ph-squares-four text-xl"></i><span>Dashboard</span></a>
+            <a href="#/generator" data-path="/generator" class="nav-link"><i class="ph ph-qr-code text-xl"></i><span>Create QR</span></a>
+            <a href="#/my-qrs"    data-path="/my-qrs"    class="nav-link"><i class="ph ph-folder-simple text-xl"></i><span>My QR Codes</span></a>
+            <a href="#/analytics" data-path="/analytics" class="nav-link"><i class="ph ph-chart-line-up text-xl"></i><span>Analytics</span></a>
+            <a href="#/history"   data-path="/history"   class="nav-link"><i class="ph ph-clock-counter-clockwise text-xl"></i><span>History</span></a>
+
+            <div class="pt-5 border-t border-white/5 mt-4">
+                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-3 px-3">Account</p>
+                <a href="#/profile"  data-path="/profile"  class="nav-link"><i class="ph ph-user text-xl"></i><span>Profile</span></a>
+                <a href="#/settings" data-path="/settings" class="nav-link"><i class="ph ph-gear text-xl"></i><span>Settings</span></a>
+            </div>
+        </nav>
+
+        <!-- User footer -->
+        <div class="p-4 border-t border-white/5 shrink-0">
+            <div class="flex items-center gap-3 px-3 py-2">
+                <div id="sidebar-avatar" class="w-8 h-8 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 text-white flex items-center justify-center font-bold text-sm shrink-0 shadow-lg shadow-purple-500/20">U</div>
+                <div class="flex-1 overflow-hidden">
+                    <div id="sidebar-name" class="text-sm font-semibold text-white truncate">User</div>
+                </div>
+                <button id="logout-btn" class="text-slate-400 hover:text-red-400 transition-colors shrink-0" title="Log out">
+                    <i class="ph ph-sign-out text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ── Main Content Area ── -->
+    <div class="flex-1 flex flex-col md:ml-64 relative">
+
+        <!-- Mobile Header -->
+        <header class="md:hidden h-16 glass-nav border-b border-white/10 flex items-center justify-between px-4 sticky top-0 z-30">
+            <div class="flex items-center gap-2">
+                <i class="ph-fill ph-qr-code text-xl text-blue-400"></i>
+                <span class="font-bold text-white">QRFlow</span>
+            </div>
+            <button id="mobile-menu-btn" class="text-slate-300 p-2">
+                <i class="ph ph-list text-2xl"></i>
+            </button>
+        </header>
+
+        <!-- Page Content Slot -->
+        <main class="flex-1 p-4 md:p-8 overflow-y-auto animate-fade-in relative z-10">
+            <div id="page-content"></div>
+        </main>
+    </div>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#0b0f19]/80 backdrop-blur-md z-50 hidden" style="opacity:0;transition:opacity .3s">
+        <div id="mobile-menu-panel" class="absolute right-0 top-0 bottom-0 w-72 glass-nav border-l border-white/10 shadow-2xl flex flex-col" style="transform:translateX(100%);transition:transform .3s">
+            <div class="h-16 flex items-center justify-between px-5 border-b border-white/5">
+                <span class="font-bold text-white">Menu</span>
+                <button id="close-menu-btn" class="text-slate-400 hover:text-white p-1"><i class="ph ph-x text-xl"></i></button>
+            </div>
+            <nav class="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+                <a href="#/dashboard" data-path="/dashboard" class="nav-link"><i class="ph-fill ph-squares-four text-xl"></i><span>Dashboard</span></a>
+                <a href="#/generator" data-path="/generator" class="nav-link"><i class="ph ph-qr-code text-xl"></i><span>Create QR</span></a>
+                <a href="#/my-qrs"    data-path="/my-qrs"    class="nav-link"><i class="ph ph-folder-simple text-xl"></i><span>My QR Codes</span></a>
+                <a href="#/analytics" data-path="/analytics" class="nav-link"><i class="ph ph-chart-line-up text-xl"></i><span>Analytics</span></a>
+                <a href="#/history"   data-path="/history"   class="nav-link"><i class="ph ph-clock-counter-clockwise text-xl"></i><span>History</span></a>
+                <div class="my-3 border-t border-white/5"></div>
+                <a href="#/profile"  data-path="/profile"  class="nav-link"><i class="ph ph-user text-xl"></i><span>Profile</span></a>
+                <a href="#/settings" data-path="/settings" class="nav-link"><i class="ph ph-gear text-xl"></i><span>Settings</span></a>
+                <button id="mobile-logout-btn" class="nav-link w-full text-red-400 hover:bg-red-500/10 mt-2">
+                    <i class="ph ph-sign-out text-xl"></i><span>Log Out</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+</div>

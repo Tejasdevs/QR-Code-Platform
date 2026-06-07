@@ -1,0 +1,40 @@
+<!-- src/views/login.html -->
+<div class="min-h-screen flex items-center justify-center bg-transparent p-4 relative overflow-hidden transition-colors duration-300">
+    <div class="max-w-md w-full glass-card rounded-3xl overflow-hidden z-10 animate-fade-in relative border border-white/10 shadow-2xl">
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 pointer-events-none"></div>
+        <div class="p-10 relative z-10">
+            <div class="text-center mb-8">
+                <a href="#/" class="inline-flex items-center gap-2 mb-6 hover:scale-105 transition-transform">
+                    <i class="ph-fill ph-qr-code text-4xl text-blue-400 drop-shadow-md"></i>
+                    <span class="font-bold text-2xl text-white tracking-tight">QRFlow</span>
+                </a>
+                <h2 class="text-2xl font-bold text-white tracking-tight">Welcome back</h2>
+                <p class="text-sm text-slate-400 mt-2">Log in to manage your QR codes.</p>
+            </div>
+
+            <div id="error-msg" class="hidden mb-6 bg-red-900/40 border border-red-500/30 text-red-200 px-4 py-3 rounded-xl text-sm backdrop-blur-md shadow-lg" role="alert"></div>
+
+            <form id="login-form" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                    <input type="email" id="email" required autocomplete="email" class="premium-input" placeholder="you@example.com">
+                </div>
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <label for="password" class="block text-sm font-medium text-slate-300">Password</label>
+                        <a href="#" class="text-xs text-blue-400 hover:text-blue-300 hover:underline transition-colors">Forgot password?</a>
+                    </div>
+                    <input type="password" id="password" required autocomplete="current-password" class="premium-input" placeholder="••••••••">
+                </div>
+                <button type="submit" id="login-submit" class="premium-btn w-full py-3 mt-4 text-[15px]">
+                    Log in <i class="ph ph-sign-in text-lg"></i>
+                </button>
+            </form>
+        </div>
+        <div class="px-10 py-5 bg-black/20 border-t border-white/5 text-center relative z-10">
+            <p class="text-sm text-slate-400">
+                Don't have an account? <a href="#/signup" class="text-blue-400 hover:text-blue-300 hover:underline font-semibold transition-colors">Sign up</a>
+            </p>
+        </div>
+    </div>
+</div>
