@@ -12,24 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        primary: {
-                            50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe',
-                            300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6',
-                            600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <!-- Tailwind removed: project uses custom CSS in src/styles.css -->
 
     
     <link rel="stylesheet" href="./src/styles.css">
@@ -39,15 +22,15 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
-<body class="bg-[#0b0f19] text-slate-50 font-sans antialiased relative">
-    
-    <div class="fixed inset-0 z-[-1] pointer-events-none overflow-hidden">
-        <div class="absolute top-0 left-0 w-[800px] h-[800px] bg-blue-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-60 animate-blob"></div>
-        <div class="absolute top-0 right-0 w-[800px] h-[800px] bg-purple-600/10 rounded-full mix-blend-screen filter blur-[100px] opacity-60 animate-blob animation-delay-2000"></div>
-        <div class="absolute -bottom-32 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-pink-600/5 rounded-full mix-blend-screen filter blur-[100px] opacity-50 animate-blob animation-delay-4000"></div>
+<body class="site-root">
+
+    <div class="page-bg">
+        <div class="blob blob-left"></div>
+        <div class="blob blob-right"></div>
+        <div class="blob blob-bottom"></div>
     </div>
-    
-    <div id="app" class="min-h-screen flex flex-col"></div>
+
+    <div id="app" class="app-root"></div>
     <script type="module" src="./src/app.js"></script>
 </body>
 </html>

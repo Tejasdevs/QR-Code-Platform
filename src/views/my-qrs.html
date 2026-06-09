@@ -1,32 +1,28 @@
-<div class="max-w-6xl mx-auto space-y-8">
-    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div class="container qr-page">
+    <div class="page-header actions-row">
         <div>
-            <h1 class="text-3xl font-bold text-white tracking-tight">My QR Codes</h1>
-            <p class="text-slate-400 mt-2 text-lg">Manage all your generated QR codes.</p>
+            <h1 class="page-title">My QR Codes</h1>
+            <p class="page-sub">Manage all your generated QR codes.</p>
         </div>
-        <a href="#/generator" class="premium-btn shrink-0">
-            <i class="ph ph-plus-circle text-lg"></i> New QR Code
+        <a href="#/generator" class="primary-action">
+            <i class="ph ph-plus-circle"></i> New QR Code
         </a>
     </div>
 
-    
-    <div class="relative group">
-        <i class="ph ph-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 text-lg group-focus-within:text-blue-400 transition-colors"></i>
-        <input type="text" id="search-input" placeholder="Search QR codes..." class="premium-input pl-11 py-3 text-base">
+    <div class="search-row">
+        <i class="ph ph-magnifying-glass search-icon" aria-hidden="true"></i>
+        <input type="text" id="search-input" placeholder="Search QR codes..." class="search-input">
     </div>
 
-    
-    <div id="qr-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        
+    <div id="qr-grid" class="qr-grid">
     </div>
 
-  
-    <div id="empty-state" class="hidden text-center py-24 glass-card rounded-3xl">
-        <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner border border-white/10">
-            <i class="ph ph-folder-open text-4xl text-slate-400"></i>
+    <div id="empty-state" class="empty-state">
+        <div class="empty-illustration">
+            <i class="ph ph-folder-open"></i>
         </div>
-        <h3 class="text-xl font-bold text-white mb-3">No QR codes yet</h3>
-        <p class="text-slate-400 mb-8 max-w-sm mx-auto">Create your first custom QR code and it will magically appear right here.</p>
-        <a href="#/generator" class="premium-btn inline-flex">Create QR Code</a>
+        <h3 class="empty-title">No QR codes yet</h3>
+        <p class="empty-sub">Create your first custom QR code and it will magically appear right here.</p>
+        <a href="#/generator" class="primary-action">Create QR Code</a>
     </div>
 </div>

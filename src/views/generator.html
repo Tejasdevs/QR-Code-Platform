@@ -1,108 +1,101 @@
-<div class="max-w-6xl mx-auto">
-    <div class="mb-8">
-        <h1 class="text-3xl font-bold text-white tracking-tight">QR Code Generator</h1>
-        <p class="text-slate-400 mt-2 text-lg">Create and customize your QR code below.</p>
+<div class="container">
+    <div class="page-header">
+        <h1 class="page-title">QR Code Generator</h1>
+        <p class="page-sub">Create and customize your QR code below.</p>
     </div>
 
-    <div class="flex flex-col lg:flex-row gap-8">
+    <div class="generator-layout">
 
-        
-        <div class="flex-1 space-y-6">
-            <div class="glass-card rounded-3xl p-8">
+        <div class="generator-form">
+            <div class="glass-card form-card">
 
-                
-                <div class="mb-8">
-                    <label class="block text-sm font-semibold text-slate-300 mb-4 uppercase tracking-widest">Data Type</label>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <label class="cursor-pointer">
-                            <input type="radio" name="qr_type" value="URL" class="peer sr-only" checked>
-                            <div class="p-4 text-center rounded-2xl border border-white/10 peer-checked:border-blue-500/50 peer-checked:bg-blue-500/10 peer-checked:text-blue-400 hover:bg-white/5 transition-all">
-                                <i class="ph ph-link text-2xl mb-2 block"></i>
-                                <span class="text-[11px] font-bold uppercase tracking-widest">URL</span>
+                <div class="form-section">
+                    <label class="form-label">Data Type</label>
+                    <div class="type-grid">
+                        <label class="type-option">
+                            <input type="radio" name="qr_type" value="URL" class="type-input" checked>
+                            <div class="type-body">
+                                <i class="ph ph-link type-icon"></i>
+                                <span class="type-text">URL</span>
                             </div>
                         </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="qr_type" value="Text" class="peer sr-only">
-                            <div class="p-4 text-center rounded-2xl border border-white/10 peer-checked:border-purple-500/50 peer-checked:bg-purple-500/10 peer-checked:text-purple-400 hover:bg-white/5 transition-all">
-                                <i class="ph ph-text-t text-2xl mb-2 block"></i>
-                                <span class="text-[11px] font-bold uppercase tracking-widest">Text</span>
+                        <label class="type-option">
+                            <input type="radio" name="qr_type" value="Text" class="type-input">
+                            <div class="type-body">
+                                <i class="ph ph-text-t type-icon"></i>
+                                <span class="type-text">Text</span>
                             </div>
                         </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="qr_type" value="WhatsApp" class="peer sr-only">
-                            <div class="p-4 text-center rounded-2xl border border-white/10 peer-checked:border-emerald-500/50 peer-checked:bg-emerald-500/10 peer-checked:text-emerald-400 hover:bg-white/5 transition-all">
-                                <i class="ph ph-whatsapp-logo text-2xl mb-2 block"></i>
-                                <span class="text-[11px] font-bold uppercase tracking-widest">WhatsApp</span>
+                        <label class="type-option">
+                            <input type="radio" name="qr_type" value="WhatsApp" class="type-input">
+                            <div class="type-body">
+                                <i class="ph ph-whatsapp-logo type-icon"></i>
+                                <span class="type-text">WhatsApp</span>
                             </div>
                         </label>
-                        <label class="cursor-pointer">
-                            <input type="radio" name="qr_type" value="WiFi" class="peer sr-only">
-                            <div class="p-4 text-center rounded-2xl border border-white/10 peer-checked:border-pink-500/50 peer-checked:bg-pink-500/10 peer-checked:text-pink-400 hover:bg-white/5 transition-all">
-                                <i class="ph ph-wifi-high text-2xl mb-2 block"></i>
-                                <span class="text-[11px] font-bold uppercase tracking-widest">WiFi</span>
+                        <label class="type-option">
+                            <input type="radio" name="qr_type" value="WiFi" class="type-input">
+                            <div class="type-body">
+                                <i class="ph ph-wifi-high type-icon"></i>
+                                <span class="type-text">WiFi</span>
                             </div>
                         </label>
                     </div>
                 </div>
 
-                
-                <div id="dynamic-inputs" class="space-y-5 mb-8"></div>
+                <div id="dynamic-inputs" class="dynamic-inputs"></div>
 
-                <hr class="border-white/5 my-8">
+                <hr class="divider">
 
-                
-                <h3 class="text-sm font-semibold text-slate-300 mb-5 uppercase tracking-widest">Customization</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-slate-400 mb-2">QR Color</label>
-                        <div class="flex items-center gap-3">
-                            <input type="color" id="qr-color" value="#ffffff" class="h-12 w-16 rounded-xl cursor-pointer border border-white/10 p-1 bg-white/5">
-                            <input type="text"  id="qr-color-text" value="#ffffff" maxlength="7"
-                                class="flex-1 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-mono uppercase text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                <h3 class="form-section-title">Customization</h3>
+                <div class="custom-grid">
+                    <div class="custom-item">
+                        <label class="form-label">QR Color</label>
+                        <div class="color-row">
+                            <input type="color" id="qr-color" value="#ffffff" class="color-picker">
+                            <input type="text"  id="qr-color-text" value="#ffffff" maxlength="7" class="color-text">
                         </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-400 mb-2">Background</label>
-                        <div class="flex items-center gap-3">
-                            <input type="color" id="qr-bg" value="#0f172a" class="h-12 w-16 rounded-xl cursor-pointer border border-white/10 p-1 bg-white/5">
-                            <input type="text"  id="qr-bg-text" value="#0f172a" maxlength="7"
-                                class="flex-1 px-4 py-3 rounded-xl border border-white/10 bg-white/5 text-sm font-mono uppercase text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                    <div class="custom-item">
+                        <label class="form-label">Background</label>
+                        <div class="color-row">
+                            <input type="color" id="qr-bg" value="#0f172a" class="color-picker">
+                            <input type="text"  id="qr-bg-text" value="#0f172a" maxlength="7" class="color-text">
                         </div>
                     </div>
                 </div>
 
-                <button id="generate-btn" class="premium-btn w-full mt-8 py-3.5 text-lg">
+                <button id="generate-btn" class="primary-btn generate-btn">
                     <i class="ph ph-magic-wand"></i> Generate QR Code
                 </button>
             </div>
         </div>
 
-                
-        <div class="lg:w-[340px] flex flex-col gap-6">
-            <div class="glass-card rounded-3xl p-8 flex flex-col items-center">
-                <h3 class="text-sm font-bold text-white mb-6 uppercase tracking-widest self-start w-full pb-4 border-b border-white/5">Live Preview</h3>
+        <aside class="preview-column">
+            <div class="glass-card preview-card">
+                <h3 class="preview-title">Live Preview</h3>
 
-                <div id="qr-preview-container" class="w-64 h-64 bg-white/5 rounded-2xl flex items-center justify-center p-4 border border-white/10 overflow-hidden shadow-inner">
+                <div id="qr-preview-container" class="qr-preview">
                     <div id="qrcode"></div>
-                    <div id="qr-placeholder" class="text-slate-500 flex flex-col items-center text-center">
-                        <i class="ph ph-qr-code text-5xl mb-3 opacity-50"></i>
-                        <span class="text-xs uppercase tracking-widest font-semibold">Preview Area</span>
+                    <div id="qr-placeholder" class="qr-placeholder">
+                        <i class="ph ph-qr-code preview-icon"></i>
+                        <span class="preview-text">Preview Area</span>
                     </div>
                 </div>
 
-                <div id="qr-actions" class="w-full mt-8 space-y-3 hidden">
-                    <button id="save-qr-btn" class="w-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-400 border border-emerald-500/30 font-semibold py-3 rounded-xl transition-all flex items-center justify-center gap-2">
-                        <i class="ph ph-floppy-disk text-lg"></i> Save to Dashboard
+                <div id="qr-actions" class="qr-actions hidden">
+                    <button id="save-qr-btn" class="btn-save">
+                        <i class="ph ph-floppy-disk"></i> Save to Dashboard
                     </button>
-                    <button id="download-png" class="premium-btn-secondary w-full py-3">
-                        <i class="ph ph-download-simple text-lg"></i> Download PNG
+                    <button id="download-png" class="secondary-btn">
+                        <i class="ph ph-download-simple"></i> Download PNG
                     </button>
                 </div>
 
-                <div id="save-success" class="hidden mt-6 w-full text-center text-emerald-400 text-sm font-medium flex items-center justify-center gap-2 bg-emerald-500/10 py-2 rounded-lg border border-emerald-500/20">
-                    <i class="ph-fill ph-check-circle text-lg"></i> Saved successfully!
+                <div id="save-success" class="save-success hidden">
+                    <i class="ph-fill ph-check-circle"></i> Saved successfully!
                 </div>
             </div>
-        </div>
+        </aside>
     </div>
 </div>

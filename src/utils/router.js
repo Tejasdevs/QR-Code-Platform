@@ -27,9 +27,7 @@ export class Router {
         }
 
         this.rootElement.innerHTML = `
-            <div class="flex items-center justify-center min-h-screen bg-transparent">
-                <div class="spinner"></div>
-            </div>`;
+            <div class="loader-wrap"><div class="spinner"></div></div>`;
 
         try {
             if (route.layout) {
@@ -62,12 +60,12 @@ export class Router {
         } catch (err) {
             console.error('Router error:', err);
             this.rootElement.innerHTML = `
-                <div class="flex items-center justify-center min-h-screen p-8">
-                    <div class="text-center">
-                        <i class="ph ph-warning-circle text-5xl text-red-400 mb-4 block"></i>
-                        <h2 class="text-xl font-bold text-slate-800 dark:text-white mb-2">Page Load Error</h2>
-                        <p class="text-slate-500 text-sm mb-4">${err.message}</p>
-                        <a href="#/" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">Go Home</a>
+                <div class="error-page">
+                    <div class="error-inner">
+                        <i class="ph ph-warning-circle icon-xxl" style="color:#fb7185;margin-bottom:1rem;"></i>
+                        <h2 class="section-title">Page Load Error</h2>
+                        <p class="muted" style="margin:0.5rem 0 1rem 0;">${err.message}</p>
+                        <a href="#/" class="primary-action">Go Home</a>
                     </div>
                 </div>`;
         }

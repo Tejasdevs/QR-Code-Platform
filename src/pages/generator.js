@@ -4,54 +4,54 @@ import { qrData, settingsData } from '../utils/storage.js';
 const inputTemplates = {
     URL: `
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Website URL</label>
+            <label class="form-label">Website URL</label>
             <input type="url" id="input-url" placeholder="https://example.com" class="premium-input">
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Name (optional)</label>
+            <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="My Website" class="premium-input">
         </div>`,
     Text: `
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Text Content</label>
+            <label class="form-label">Text Content</label>
             <textarea id="input-text" rows="4" placeholder="Enter your text..." class="premium-input resize-none"></textarea>
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Name (optional)</label>
+            <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="My Note" class="premium-input">
         </div>`,
     WhatsApp: `
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Phone Number (with country code)</label>
+            <label class="form-label">Phone Number (with country code)</label>
             <input type="tel" id="input-phone" placeholder="911234567890" class="premium-input">
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Pre-filled Message</label>
+            <label class="form-label">Pre-filled Message</label>
             <input type="text" id="input-msg" placeholder="Hello!" class="premium-input">
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Name (optional)</label>
+            <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="WhatsApp Contact" class="premium-input">
         </div>`,
     WiFi: `
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Network Name (SSID)</label>
+            <label class="form-label">Network Name (SSID)</label>
             <input type="text" id="input-ssid" placeholder="My WiFi" class="premium-input">
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Password</label>
+            <label class="form-label">Password</label>
             <input type="password" id="input-pass" placeholder="WiFi Password" class="premium-input">
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Encryption</label>
+            <label class="form-label">Encryption</label>
             <select id="input-enc" class="premium-input">
-                <option value="WPA" class="text-slate-900">WPA/WPA2</option>
-                <option value="WEP" class="text-slate-900">WEP</option>
-                <option value="nopass" class="text-slate-900">None</option>
+                <option value="WPA">WPA/WPA2</option>
+                <option value="WEP">WEP</option>
+                <option value="nopass">None</option>
             </select>
         </div>
         <div>
-            <label class="block text-sm font-medium text-slate-300 mb-2">Name (optional)</label>
+            <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="Office WiFi" class="premium-input">
         </div>`
 };
