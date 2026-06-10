@@ -1,3 +1,5 @@
+import { auth } from './storage.js';
+
 export class Router {
     constructor(routes) {
         this.routes = routes;
@@ -81,7 +83,7 @@ export class Router {
     }
 
     isAuthenticated() {
-        return !!localStorage.getItem('qrflow_currentUser');
+        return auth.isAuthenticated();
     }
 
     init() {

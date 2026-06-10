@@ -23,22 +23,57 @@ export const storage = {
 };
 
 export const auth = {
+    normalizeEmail: (email = '') => email.trim().toLowerCase(),
     signup: (user) => {
-        const users = storage.get('users', []);
-        if (users.find(u => u.email === user.email)) {
-            throw new Error('User already exists');
+        const name = String(user.name || '').trim();
+        const email = auth.normalizeEmail(user.email);
+        const password = String(user.password || '');
+
+        if (!name) {
+            throw new Error('Please enter your full name.');
         }
-        users.push(user);
+        if (!email) {
+            throw new Error('Please enter your email address.');
+        }
+        if (!password) {
+            throw new Error('Please enter a password.');
+        }
+
+        const users = storage.get('users', []);
+        if (users.find(u => auth.normalizeEmail(u.email) === email)) {
+            throw new Error('An account with this email already exists.');
+        }
+
+        users.push({ name, email, password });
         storage.set('users', users);
-        return true;
+        storage.remove('currentUser');
+
+        return { name, email };
     },
     login: (email, password) => {
+        const normalizedEmail = auth.normalizeEmail(email);
+        const enteredPassword = String(password || '');
+
+        if (!normalizedEmail || !enteredPassword) {
+            throw new Error('Please enter your email and password.');
+        }
+
         const users = storage.get('users', []);
-        const user = users.find(u => u.email === email && u.password === password);
+        const user = users.find(u =>
+            auth.normalizeEmail(u.email) === normalizedEmail &&
+            String(u.password || '') === enteredPassword
+        );
+
         if (!user) {
             throw new Error('Invalid email or password');
         }
-        storage.set('currentUser', { name: user.name, email: user.email });
+
+        storage.set('currentUser', {
+            name: user.name,
+            email: auth.normalizeEmail(user.email),
+            authenticatedAt: new Date().toISOString()
+        });
+
         return user;
     },
     logout: () => {
@@ -48,7 +83,8 @@ export const auth = {
         return storage.get('currentUser');
     },
     isAuthenticated: () => {
-        return !!storage.get('currentUser');
+        const currentUser = storage.get('currentUser');
+        return !!(currentUser && currentUser.email);
     }
 };
 
