@@ -877,10 +877,8 @@
 .search-row { position:relative; margin-bottom:1rem; }
 .search-icon { position:absolute; left:0.9rem; top:50%; transform:translateY(-50%); color:#94a3b8; }
 .search-input { width:100%; padding:0.75rem 1rem 0.75rem 3rem; border-radius:0.75rem; border:1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color:#fff; }
-.qr-grid { display:grid; grid-template-columns:1fr; gap:1rem; }
-@media (min-width:640px) { .qr-grid { grid-template-columns:repeat(2,1fr); } }
-@media (min-width:1024px) { .qr-grid { grid-template-columns:repeat(3,1fr); } }
-.card-qr { border-radius:0.75rem; padding:1rem; display:flex; flex-direction:column; gap:0.75rem; }
+.qr-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(16rem, 20rem)); gap:1rem; align-items:start; }
+.card-qr { border-radius:0.85rem; padding:0.85rem; display:flex; flex-direction:column; gap:0.8rem; background:#000; border:1px solid rgba(255,255,255,0.12); }
 .empty-state { display:none; text-align:center; padding:3rem 1rem; border-radius:1rem; }
 .empty-illustration { width:5rem; height:5rem; border-radius:999px; background: rgba(255,255,255,0.03); display:inline-flex; align-items:center; justify-content:center; margin:0 auto 1rem; color:#cbd5e1; font-size:2rem; }
 .empty-title { font-size:1.125rem; font-weight:700; color:#fff; margin-bottom:0.5rem; }
@@ -889,14 +887,20 @@
 
 /* QR list semantic helpers */
 .qr-row { display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
+.qr-card-top { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
 .qr-meta { display:flex; align-items:center; gap:1rem; }
 .qr-icon { width:3rem; height:3rem; border-radius:0.75rem; display:flex; align-items:center; justify-content:center; background: rgba(59,130,246,0.06); color:#60a5fa; font-size:1.125rem; border:1px solid rgba(59,130,246,0.12); box-shadow: inset 0 2px 6px rgba(0,0,0,0.3); transition: transform .18s ease; }
 .group:hover .qr-icon { transform: scale(1.05); }
-.qr-title { font-weight:700; color:#fff; font-size:1rem; max-width:140px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.qr-badge { font-size:10px; padding:0.125rem 0.5rem; border-radius:999px; background: rgba(59,130,246,0.12); color:#60a5fa; font-weight:700; border:1px solid rgba(59,130,246,0.12); text-transform:uppercase; letter-spacing:0.08em; display:inline-block; margin-top:0.25rem; }
+.qr-title { font-weight:850; color:#fff; font-size:1.05rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; margin:0; }
+.qr-badge { font-size:10px; padding:0.25rem 0.6rem; border-radius:999px; background: transparent; color:#fff; font-weight:850; border:1px solid rgba(255,255,255,0.18); text-transform:uppercase; letter-spacing:0.08em; display:inline-block; }
 .qr-delete-btn { background:transparent; border:none; padding:0.35rem; border-radius:0.5rem; color:#94a3b8; transition: color .15s ease, background-color .15s ease; }
 .qr-delete-btn:hover { color:#ff6b6b; background: rgba(255,0,0,0.06); }
-.qr-data { font-family: monospace; background: rgba(0,0,0,0.2); padding:0.75rem; border-radius:0.75rem; border:1px solid rgba(255,255,255,0.05); color:#94a3b8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.saved-qr-preview { width:calc(100% - 1rem); box-sizing:border-box; min-height:9.5rem; display:flex; align-items:center; justify-content:center; padding:0.75rem; margin:0 auto; border-radius:0.75rem; background:#fff; }
+.saved-qr-preview canvas,
+.saved-qr-preview img { width:8.25rem !important; height:8.25rem !important; display:block; }
+.saved-qr-info { display:flex; flex-direction:column; gap:0.45rem; text-align:left; }
+.qr-data { display:block; font-family: monospace; background: transparent; padding:0; border-radius:0; border:none; color:rgba(255,255,255,0.72); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-decoration:none; }
+.qr-data:hover { color:#fff; text-decoration:underline; }
 .qr-footer { display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; color:#94a3b8; padding-top:0.75rem; border-top:1px solid rgba(255,255,255,0.05); }
 .qr-date { color:#94a3b8; }
 .qr-recreate { color:#60a5fa; font-weight:700; text-decoration:none; text-transform:uppercase; letter-spacing:0.08em; }

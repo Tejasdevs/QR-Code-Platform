@@ -1,6 +1,13 @@
 import { setupLayoutEvents } from '../components/layout.js';
 import { qrData } from '../utils/storage.js';
 
+const escapeHtml = (value = '') => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
 const renderGrid = (qrs) => {
     const grid     = document.getElementById('qr-grid');
     const emptyEl  = document.getElementById('empty-state');
@@ -14,21 +21,22 @@ const renderGrid = (qrs) => {
     emptyEl.classList.add('hidden');
     grid.innerHTML = qrs.map(qr => `
         <div class="card-qr group">
-            <div class="qr-row">
-                <div class="qr-meta">
-                    <div class="qr-icon">
-                        <i class="ph ph-qr-code"></i>
-                    </div>
-                    <div>
-                        <h4 class="qr-title">${qr.name || qr.type + ' QR'}</h4>
-                        <span class="qr-badge">${qr.type}</span>
-                    </div>
-                </div>
-                <button data-id="${qr.id}" class="qr-delete-btn">
+            <div class="qr-card-top">
+                <span class="qr-badge">${escapeHtml(qr.type)}</span>
+                <button data-id="${escapeHtml(qr.id)}" class="qr-delete-btn" aria-label="Delete ${escapeHtml(qr.name || qr.type + ' QR')}">
                     <i class="ph ph-trash icon-lg"></i>
                 </button>
             </div>
-            <p class="qr-data">${qr.data || ''}</p>
+
+            <div class="saved-qr-preview" data-qr-id="${escapeHtml(qr.id)}"></div>
+
+            <div class="saved-qr-info">
+                <h4 class="qr-title">${escapeHtml(qr.name || qr.type + ' QR')}</h4>
+                <a class="qr-data" href="${qr.type === 'URL' ? escapeHtml(qr.data || '#') : '#'}" target="_blank" rel="noopener noreferrer">
+                    ${escapeHtml(qr.data || '')}
+                </a>
+            </div>
+
             <div class="qr-footer">
                 <span class="qr-date">${new Date(qr.createdAt).toLocaleDateString()}</span>
                 <a href="#/generator" class="qr-recreate">Recreate</a>
@@ -36,7 +44,21 @@ const renderGrid = (qrs) => {
         </div>
     `).join('');
 
-    grid.querySelectorAll('.delete-btn').forEach(btn => {
+    qrs.forEach(qr => {
+        const target = grid.querySelector(`[data-qr-id="${CSS.escape(qr.id)}"]`);
+        if (target && qr.data && window.QRCode) {
+            new QRCode(target, {
+                text: qr.data,
+                width: 132,
+                height: 132,
+                colorDark: '#000000',
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+    });
+
+    grid.querySelectorAll('.qr-delete-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             if (confirm('Delete this QR code permanently?')) {
                 qrData.delete(btn.dataset.id);

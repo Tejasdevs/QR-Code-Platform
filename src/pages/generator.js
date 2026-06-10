@@ -144,11 +144,11 @@ export const GeneratorPage = {
             if (canvas) {
                 const a = document.createElement('a');
                 a.href     = canvas.toDataURL('image/png');
-                a.download = 'qrflow-code.png';
+                a.download = 'scanify-code.png';
                 a.click();
             } else {
                 const img = qrContainer.querySelector('img');
-                if (img) { const a = document.createElement('a'); a.href = img.src; a.download = 'qrflow-code.png'; a.click(); }
+                if (img) { const a = document.createElement('a'); a.href = img.src; a.download = 'scanify-code.png'; a.click(); }
             }
         });
     }
