@@ -318,6 +318,276 @@
     .footer-inner { flex-direction:column; gap:0.5rem; text-align:center; }
 }
 
+/* Clean landing page refresh */
+.landing-clean {
+    min-height: 100vh;
+    background: #000;
+    color: #fff;
+}
+
+.landing-clean .landing-nav {
+    position: sticky;
+    background: #000;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+.landing-clean .nav-inner {
+    width: 100%;
+    max-width: none;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding: 1rem 2.25rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.landing-clean .brand-link {
+    justify-self: start;
+    color: #fff;
+    text-decoration: none;
+}
+
+.landing-clean .brand-title {
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 900;
+}
+
+.landing-clean .nav-links {
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+}
+
+.landing-clean .nav-actions {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.8rem;
+}
+
+.landing-clean .nav-link-muted,
+.landing-clean .nav-action {
+    color: rgba(255,255,255,0.78);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.landing-clean .nav-link-muted:hover,
+.landing-clean .nav-action:hover {
+    color: #fff;
+    background: transparent;
+}
+
+.landing-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-height: 2.75rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.6rem;
+    font-weight: 850;
+    text-decoration: none;
+    line-height: 1;
+}
+
+.landing-btn-primary {
+    background: #fff;
+    color: #000;
+    border: 1px solid #fff;
+}
+
+.landing-btn-secondary {
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.24);
+}
+
+.landing-clean .landing-hero {
+    min-height: 70vh;
+    padding: 6rem 1.25rem 5rem;
+    align-items: center;
+    background: #000;
+}
+
+.landing-clean .hero-inner {
+    max-width: 58rem;
+    text-align: center;
+}
+
+.hero-eyebrow {
+    margin: 0 0 1rem;
+    color: rgba(255,255,255,0.68);
+    font-size: 0.82rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.landing-clean .hero-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(2.6rem, 7vw, 5.6rem);
+    line-height: 0.98;
+    font-weight: 900;
+    letter-spacing: 0;
+}
+
+.landing-clean .hero-sub {
+    max-width: 42rem;
+    margin: 1.3rem auto 0;
+    color: rgba(255,255,255,0.72);
+    font-size: 1.15rem;
+    line-height: 1.65;
+}
+
+.landing-clean .hero-actions {
+    margin-top: 2rem;
+}
+
+.landing-clean .landing-strip {
+    padding: 3.5rem 1.25rem;
+    background: #000;
+    border-top: 1px solid rgba(255,255,255,0.09);
+}
+
+.landing-strip-inner {
+    max-width: 76rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    gap: 2rem;
+    align-items: start;
+}
+
+.landing-section-label {
+    margin: 0 0 0.75rem;
+    color: rgba(255,255,255,0.56);
+    font-size: 0.78rem;
+    font-weight: 850;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+}
+
+.landing-section-title {
+    margin: 0;
+    color: #fff;
+    font-size: clamp(1.75rem, 3vw, 2.8rem);
+    line-height: 1.08;
+}
+
+.landing-feature-list {
+    display: grid;
+    gap: 0.8rem;
+}
+
+.landing-feature-row {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.86);
+    font-size: 1rem;
+    line-height: 1.45;
+}
+
+.landing-feature-row:first-child {
+    padding-top: 0;
+}
+
+.landing-feature-row i {
+    color: #fff;
+    font-size: 1.25rem;
+}
+
+.landing-strip-muted {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.landing-steps {
+    max-width: 76rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+.landing-steps p {
+    margin: 0;
+    color: rgba(255,255,255,0.78);
+    font-weight: 750;
+}
+
+.landing-steps strong {
+    color: #fff;
+}
+
+@media (max-width: 980px) {
+    .landing-clean .nav-inner {
+        grid-template-columns: 1fr auto;
+        grid-template-areas:
+            "brand actions";
+        gap: 0.9rem 1rem;
+    }
+
+    .landing-clean .brand-link {
+        grid-area: brand;
+    }
+
+    .landing-clean .nav-actions {
+        grid-area: actions;
+    }
+}
+
+@media (max-width: 640px) {
+    .landing-clean .nav-inner {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "brand"
+            "actions";
+        justify-items: center;
+        padding: 0.9rem 1rem;
+    }
+
+    .landing-clean .brand-link,
+    .landing-clean .nav-actions {
+        justify-self: center;
+    }
+
+    .landing-clean .nav-actions {
+        width: 100%;
+    }
+
+    .landing-clean .nav-actions .nav-action,
+    .landing-clean .nav-actions .landing-btn {
+        flex: 1;
+    }
+
+    .landing-clean .landing-hero {
+        min-height: auto;
+        padding-top: 4.5rem;
+    }
+
+    .landing-clean .hero-actions .landing-btn {
+        width: 100%;
+    }
+
+    .landing-strip-inner,
+    .landing-steps {
+        grid-template-columns: 1fr;
+    }
+}
+
 
 /* Layout */
 .app-layout { min-height:100vh; background:#000; overflow-x:hidden; transition: color .2s ease, background-color .2s ease; }
