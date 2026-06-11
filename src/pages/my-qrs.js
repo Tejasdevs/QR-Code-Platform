@@ -1,5 +1,6 @@
 import { setupLayoutEvents } from '../components/layout.js';
 import { qrData } from '../utils/storage.js';
+import { showToast } from '../utils/toast.js';
 
 const escapeHtml = (value = '') => String(value)
     .replace(/&/g, '&amp;')
@@ -35,6 +36,7 @@ const renderGrid = (qrs) => {
                 <a class="qr-data" href="${qr.type === 'URL' ? escapeHtml(qr.data || '#') : '#'}" target="_blank" rel="noopener noreferrer">
                     ${escapeHtml(qr.data || '')}
                 </a>
+                <button type="button" data-copy="${escapeHtml(qr.data || '')}" class="qr-copy-btn">Copy link</button>
             </div>
 
             <div class="qr-footer">
@@ -63,6 +65,23 @@ const renderGrid = (qrs) => {
             if (confirm('Delete this QR code permanently?')) {
                 qrData.delete(btn.dataset.id);
                 renderGrid(qrData.getAll());
+                showToast('QR code deleted.', 'success');
+            }
+        });
+    });
+
+    grid.querySelectorAll('.qr-copy-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            if (!btn.dataset.copy) {
+                showToast('There is no link to copy.', 'error');
+                return;
+            }
+
+            try {
+                await navigator.clipboard.writeText(btn.dataset.copy);
+                showToast('Link copied to clipboard.', 'success');
+            } catch (err) {
+                showToast('Could not copy link.', 'error');
             }
         });
     });

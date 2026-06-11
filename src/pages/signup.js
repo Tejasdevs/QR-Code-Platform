@@ -1,4 +1,5 @@
 import { auth } from '../utils/storage.js';
+import { showToast } from '../utils/toast.js';
 
 export const SignupPage = {
     afterRender: async () => {
@@ -16,15 +17,18 @@ export const SignupPage = {
             if (password.length < 6) {
                 errorMsg.textContent = 'Password must be at least 6 characters.';
                 errorMsg.className = 'alert-visible';
+                showToast('Password must be at least 6 characters.', 'error');
                 return;
             }
 
             try {
                 auth.signup({ name, email, password });
+                showToast('Account created. Please log in.', 'success');
                 window.location.hash = '#/login?signup=success';
             } catch (err) {
                 errorMsg.textContent = err.message;
                 errorMsg.className = 'alert-visible';
+                showToast(err.message, 'error');
             }
         });
     }

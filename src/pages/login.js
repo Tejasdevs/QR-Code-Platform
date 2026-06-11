@@ -1,4 +1,5 @@
 import { auth } from '../utils/storage.js';
+import { showToast } from '../utils/toast.js';
 
 export const LoginPage = {
     afterRender: async () => {
@@ -9,6 +10,7 @@ export const LoginPage = {
         if (window.location.hash.includes('signup=success') && successMsg) {
             successMsg.textContent = 'Account created successfully. Please log in with your email and password.';
             successMsg.className = 'alert-success';
+            showToast('Account created. Please log in.', 'success');
         }
 
         form.addEventListener('submit', e => {
@@ -20,10 +22,12 @@ export const LoginPage = {
 
             try {
                 auth.login(email, password);
+                showToast('Welcome back.', 'success');
                 window.location.hash = '#/dashboard';
             } catch (err) {
                 errorMsg.textContent = err.message;
                 errorMsg.className = 'alert-visible';
+                showToast(err.message, 'error');
             }
         });
     }

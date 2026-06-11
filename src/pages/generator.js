@@ -1,5 +1,6 @@
 import { setupLayoutEvents } from '../components/layout.js';
 import { qrData, settingsData } from '../utils/storage.js';
+import { showToast } from '../utils/toast.js';
 
 const inputTemplates = {
     URL: `
@@ -112,7 +113,7 @@ export const GeneratorPage = {
             currentDataStr = buildDataString(type);
 
             if (!currentDataStr.trim()) {
-                alert('Please fill in the required fields.');
+                showToast('Please fill in the required fields.', 'error');
                 return;
             }
 
@@ -130,6 +131,7 @@ export const GeneratorPage = {
 
             document.getElementById('qr-actions').classList.remove('hidden');
             document.getElementById('save-success').classList.add('hidden');
+            showToast('QR code generated successfully.', 'success');
         });
 
         saveBtn.addEventListener('click', () => {
@@ -137,6 +139,7 @@ export const GeneratorPage = {
             const nameEl = document.getElementById('input-name');
             qrData.save({ type, name: nameEl ? nameEl.value : '', data: currentDataStr, color: colorPicker.value, bg: bgPicker.value });
             document.getElementById('save-success').classList.remove('hidden');
+            showToast('QR code saved to My QR Codes.', 'success');
         });
 
         document.getElementById('download-png').addEventListener('click', () => {
@@ -146,9 +149,10 @@ export const GeneratorPage = {
                 a.href     = canvas.toDataURL('image/png');
                 a.download = 'scanify-code.png';
                 a.click();
+                showToast('QR code downloaded.', 'success');
             } else {
                 const img = qrContainer.querySelector('img');
-                if (img) { const a = document.createElement('a'); a.href = img.src; a.download = 'scanify-code.png'; a.click(); }
+                if (img) { const a = document.createElement('a'); a.href = img.src; a.download = 'scanify-code.png'; a.click(); showToast('QR code downloaded.', 'success'); }
             }
         });
     }
