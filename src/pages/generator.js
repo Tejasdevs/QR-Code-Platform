@@ -93,6 +93,7 @@ export const GeneratorPage = {
 
         let currentQRCode    = null;
         let currentDataStr   = '';
+        let currentQRId      = '';
 
         const renderInputs = (type) => {
             dynamicInputs.innerHTML = inputTemplates[type] || '';
@@ -111,6 +112,7 @@ export const GeneratorPage = {
         generateBtn.addEventListener('click', () => {
             const type = document.querySelector('input[name="qr_type"]:checked').value;
             currentDataStr = buildDataString(type);
+            currentQRId = Date.now().toString();
 
             if (!currentDataStr.trim()) {
                 showToast('Please fill in the required fields.', 'error');
@@ -137,7 +139,7 @@ export const GeneratorPage = {
         saveBtn.addEventListener('click', () => {
             const type   = document.querySelector('input[name="qr_type"]:checked').value;
             const nameEl = document.getElementById('input-name');
-            qrData.save({ type, name: nameEl ? nameEl.value : '', data: currentDataStr, color: colorPicker.value, bg: bgPicker.value });
+            qrData.save({ id: currentQRId || Date.now().toString(), type, name: nameEl ? nameEl.value : '', data: currentDataStr, color: colorPicker.value, bg: bgPicker.value });
             document.getElementById('save-success').classList.remove('hidden');
             showToast('QR code saved to My QR Codes.', 'success');
         });

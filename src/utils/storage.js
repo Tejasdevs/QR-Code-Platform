@@ -1,4 +1,5 @@
 const PREFIX = 'qrflow_';
+const LEGACY_PREFIXES = ['scanify_'];
 
 export const storage = {
     get: (key, defaultValue = null) => {
@@ -22,12 +23,45 @@ export const storage = {
     }
 };
 
+const readStoredArray = (key) => {
+    const values = [storage.get(key, [])];
+
+    LEGACY_PREFIXES.forEach(prefix => {
+        try {
+            const item = localStorage.getItem(prefix + key);
+            if (item) values.push(JSON.parse(item));
+        } catch (e) {
+            console.error('Error reading legacy storage', e);
+        }
+    });
+
+    return values.flatMap(value => Array.isArray(value) ? value : []);
+};
+
 export const auth = {
     normalizeEmail: (email = '') => email.trim().toLowerCase(),
+    normalizePassword: (password = '') => String(password).trim(),
+    normalizeUser: (user = {}) => ({
+        name: String(user.name || 'User').trim() || 'User',
+        email: auth.normalizeEmail(user.email),
+        password: auth.normalizePassword(user.password)
+    }),
+    getUsers: () => {
+        const users = readStoredArray('users')
+            .map(auth.normalizeUser)
+            .filter(user => user.email && user.password);
+
+        const uniqueUsers = users.filter((user, index, list) =>
+            list.findIndex(item => item.email === user.email) === index
+        );
+
+        storage.set('users', uniqueUsers);
+        return uniqueUsers;
+    },
     signup: (user) => {
         const name = String(user.name || '').trim();
         const email = auth.normalizeEmail(user.email);
-        const password = String(user.password || '');
+        const password = auth.normalizePassword(user.password);
 
         if (!name) {
             throw new Error('Please enter your full name.');
@@ -39,8 +73,8 @@ export const auth = {
             throw new Error('Please enter a password.');
         }
 
-        const users = storage.get('users', []);
-        if (users.find(u => auth.normalizeEmail(u.email) === email)) {
+        const users = auth.getUsers();
+        if (users.find(u => u.email === email)) {
             throw new Error('An account with this email already exists.');
         }
 
@@ -52,16 +86,16 @@ export const auth = {
     },
     login: (email, password) => {
         const normalizedEmail = auth.normalizeEmail(email);
-        const enteredPassword = String(password || '');
+        const enteredPassword = auth.normalizePassword(password);
 
         if (!normalizedEmail || !enteredPassword) {
             throw new Error('Please enter your email and password.');
         }
 
-        const users = storage.get('users', []);
+        const users = auth.getUsers();
         const user = users.find(u =>
-            auth.normalizeEmail(u.email) === normalizedEmail &&
-            String(u.password || '') === enteredPassword
+            u.email === normalizedEmail &&
+            u.password === enteredPassword
         );
 
         if (!user) {
@@ -92,7 +126,7 @@ export const qrData = {
     getAll: () => storage.get('qrs', []),
     save: (qr) => {
         const qrs = storage.get('qrs', []);
-        const newQR = { ...qr, id: Date.now().toString(), createdAt: new Date().toISOString() };
+        const newQR = { ...qr, id: qr.id || Date.now().toString(), createdAt: qr.createdAt || new Date().toISOString() };
         qrs.unshift(newQR);
         storage.set('qrs', qrs);
         historyData.add(`Generated a new ${qr.type} QR code`);
@@ -113,6 +147,18 @@ export const qrData = {
             historyData.add(`Edited a QR code`);
         }
     }
+};
+
+export const scanData = {
+    getAll: () => storage.get('scans', []),
+    add: (qrId) => {
+        const scans = storage.get('scans', []);
+        const scan = { id: Date.now().toString(), qrId, scannedAt: new Date().toISOString() };
+        scans.unshift(scan);
+        storage.set('scans', scans);
+        return scan;
+    },
+    getByQR: (qrId) => storage.get('scans', []).filter(scan => scan.qrId === qrId)
 };
 
 export const historyData = {
