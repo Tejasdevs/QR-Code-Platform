@@ -6,11 +6,23 @@ export const LoginPage = {
         const form     = document.getElementById('login-form');
         const errorMsg = document.getElementById('error-msg');
         const successMsg = document.getElementById('success-msg');
+        const passwordInput = document.getElementById('password');
+        const passwordToggle = document.getElementById('password-toggle');
 
         if (window.location.hash.includes('signup=success') && successMsg) {
             successMsg.textContent = 'Account created successfully. Please log in with your email and password.';
             successMsg.className = 'alert-success';
             showToast('Account created. Please log in.', 'success');
+        }
+
+        if (passwordInput && passwordToggle) {
+            passwordToggle.addEventListener('click', () => {
+                const shouldShowPassword = passwordInput.type === 'password';
+                passwordInput.type = shouldShowPassword ? 'text' : 'password';
+                passwordToggle.setAttribute('aria-label', shouldShowPassword ? 'Hide password' : 'Show password');
+                passwordToggle.setAttribute('aria-pressed', String(shouldShowPassword));
+                passwordToggle.innerHTML = `<i class="ph ${shouldShowPassword ? 'ph-eye-slash' : 'ph-eye'}"></i>`;
+            });
         }
 
         form.addEventListener('submit', e => {

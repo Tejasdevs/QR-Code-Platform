@@ -22,7 +22,12 @@
                         <label for="password" class="form-label">Password</label>
                         <a href="#" class="link-forgot">Forgot password?</a>
                     </div>
-                    <input type="password" id="password" required autocomplete="current-password" class="form-input" placeholder="Password">
+                    <div class="password-field">
+                        <input type="password" id="password" required autocomplete="current-password" class="form-input" placeholder="Password">
+                        <button type="button" id="password-toggle" class="password-toggle" aria-label="Show password" aria-pressed="false">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" id="login-submit" class="primary-btn auth-submit">
                     Log in <i class="ph ph-sign-in"></i>

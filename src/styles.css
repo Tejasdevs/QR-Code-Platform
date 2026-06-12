@@ -840,6 +840,13 @@
 .form-input { width:100%; box-sizing:border-box; min-height:3.1rem; padding:0.85rem 1rem; border-radius:0.65rem; border:1px solid rgba(255,255,255,0.14); background: rgba(255,255,255,0.035); color:#fff; }
 .form-input:focus { outline:none; border-color:rgba(255,255,255,0.72); box-shadow:0 0 0 3px rgba(255,255,255,0.08); }
 .form-input::placeholder { color:rgba(255,255,255,0.45); }
+.password-field { position:relative; }
+.password-field .form-input { padding-right:3.1rem; }
+.password-toggle { position:absolute; top:50%; right:0.45rem; transform:translateY(-50%); width:2.2rem; height:2.2rem; display:inline-flex; align-items:center; justify-content:center; border:1px solid transparent; border-radius:0.55rem; background:transparent; color:rgba(255,255,255,0.86); cursor:pointer; transition:color .15s ease, background-color .15s ease, border-color .15s ease; }
+.password-toggle i { color:currentColor; font-size:1.15rem; line-height:1; }
+.password-toggle:hover,
+.password-toggle:focus-visible { color:#fff; background:rgba(255,255,255,0.10); border-color:rgba(255,255,255,0.16); outline:none; }
+.password-toggle:active { background:rgba(255,255,255,0.16); }
 .form-row-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; }
 .link-forgot { color:#fff; font-size:0.82rem; text-decoration:none; }
 .link-forgot:hover { text-decoration:underline; }
