@@ -22,8 +22,11 @@ export const LoginPage = {
 
             try {
                 auth.login(email, password);
-                showToast('Welcome back.', 'success');
-                window.location.hash = '#/dashboard';
+                const closeSuccessToast = showToast('Signed in successfully.', 'success', 1100);
+                setTimeout(() => {
+                    closeSuccessToast();
+                    window.location.hash = '#/dashboard';
+                }, 1250);
             } catch (err) {
                 errorMsg.textContent = err.message;
                 errorMsg.className = 'alert-visible';

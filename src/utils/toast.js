@@ -12,25 +12,39 @@ const getToastRoot = () => {
     return root;
 };
 
-export const showToast = (message, type = 'info') => {
+export const showToast = (message, type = 'info', duration = 3200) => {
     const root = getToastRoot();
     const toast = document.createElement('div');
     const id = `toast-${++toastId}`;
     toast.id = id;
     toast.className = `toast toast-${type}`;
     toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
-    toast.innerHTML = `
-        <span class="toast-dot" aria-hidden="true"></span>
-        <span class="toast-message">${message}</span>
-        <button type="button" class="toast-close" aria-label="Dismiss notification">&times;</button>
-    `;
+
+    const dot = document.createElement('span');
+    dot.className = 'toast-dot';
+    dot.setAttribute('aria-hidden', 'true');
+
+    const text = document.createElement('span');
+    text.className = 'toast-message';
+    text.textContent = message;
+
+    const closeButton = document.createElement('button');
+    closeButton.type = 'button';
+    closeButton.className = 'toast-close';
+    closeButton.setAttribute('aria-label', 'Dismiss notification');
+    closeButton.textContent = 'x';
+
+    toast.append(dot, text, closeButton);
 
     const closeToast = () => {
+        if (!toast.isConnected) return;
         toast.classList.add('toast-hide');
         setTimeout(() => toast.remove(), 180);
     };
 
-    toast.querySelector('.toast-close').addEventListener('click', closeToast);
+    closeButton.addEventListener('click', closeToast);
     root.appendChild(toast);
-    setTimeout(closeToast, 3200);
+    setTimeout(closeToast, duration);
+
+    return closeToast;
 };
