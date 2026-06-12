@@ -9,6 +9,90 @@ const escapeHtml = (value = '') => String(value)
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#039;');
 
+const sanitizeFileName = (value = 'scanify-qr') => String(value)
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 48) || 'scanify-qr';
+
+const canvasToBlob = (canvas) => new Promise(resolve => {
+    canvas.toBlob(resolve, 'image/png');
+});
+
+const getQrImageFile = async (qr) => {
+    const preview = document.querySelector(`[data-qr-id="${CSS.escape(String(qr.id))}"]`);
+    const fileName = `${sanitizeFileName(qr.name || `${qr.type} QR`)}.png`;
+    const canvas = preview?.querySelector('canvas');
+
+    if (canvas) {
+        const blob = await canvasToBlob(canvas);
+        return blob ? new File([blob], fileName, { type: 'image/png' }) : null;
+    }
+
+    const image = preview?.querySelector('img');
+    if (image?.src) {
+        const response = await fetch(image.src);
+        const blob = await response.blob();
+        return new File([blob], fileName, { type: blob.type || 'image/png' });
+    }
+
+    return null;
+};
+
+const copyQrLink = async (link) => {
+    await navigator.clipboard.writeText(link);
+    showToast('Link copied to clipboard.', 'success');
+};
+
+const getTextSharePayload = (title, text, link) => {
+    try {
+        return { title, text, url: new URL(link).href };
+    } catch (err) {
+        return { title, text };
+    }
+};
+
+const shareQr = async (qr) => {
+    const title = qr.name || `${qr.type} QR`;
+    const link = qr.data || '';
+    const text = `${title}\n${link}`.trim();
+
+    if (!link) {
+        showToast('There is no link to share.', 'error');
+        return;
+    }
+
+    if (!navigator.share) {
+        try {
+            await copyQrLink(link);
+        } catch (err) {
+            showToast('Could not copy link.', 'error');
+        }
+        return;
+    }
+
+    try {
+        const file = await getQrImageFile(qr);
+        const shareWithFile = file ? { title, text, files: [file] } : null;
+
+        if (shareWithFile && navigator.canShare?.(shareWithFile)) {
+            await navigator.share(shareWithFile);
+            return;
+        }
+
+        await navigator.share(getTextSharePayload(title, text, link));
+    } catch (err) {
+        if (err?.name === 'AbortError') return;
+
+        try {
+            await copyQrLink(link);
+        } catch (copyErr) {
+            showToast('Could not share this QR code.', 'error');
+        }
+    }
+};
+
 const renderGrid = (qrs) => {
     const grid     = document.getElementById('qr-grid');
     const emptyEl  = document.getElementById('empty-state');
@@ -36,7 +120,16 @@ const renderGrid = (qrs) => {
                 <a class="qr-data" href="${qr.type === 'URL' ? escapeHtml(qr.data || '#') : '#'}" target="_blank" rel="noopener noreferrer">
                     ${escapeHtml(qr.data || '')}
                 </a>
-                <button type="button" data-copy="${escapeHtml(qr.data || '')}" class="qr-copy-btn">Copy link</button>
+                <div class="qr-card-actions">
+                    <button type="button" data-copy="${escapeHtml(qr.data || '')}" class="qr-copy-btn">
+                        <i class="ph ph-copy"></i>
+                        Copy link
+                    </button>
+                    <button type="button" data-share-id="${escapeHtml(qr.id)}" class="qr-share-btn">
+                        <i class="ph ph-share-network"></i>
+                        Share
+                    </button>
+                </div>
             </div>
 
             <div class="qr-footer">
@@ -83,6 +176,18 @@ const renderGrid = (qrs) => {
             } catch (err) {
                 showToast('Could not copy link.', 'error');
             }
+        });
+    });
+
+    grid.querySelectorAll('.qr-share-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const qr = qrs.find(item => String(item.id) === btn.dataset.shareId);
+            if (!qr) {
+                showToast('QR code not found.', 'error');
+                return;
+            }
+
+            await shareQr(qr);
         });
     });
 };

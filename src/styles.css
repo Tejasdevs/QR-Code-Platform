@@ -1011,8 +1011,13 @@
 .saved-qr-info { display:flex; flex-direction:column; gap:0.45rem; text-align:left; }
 .qr-data { display:block; font-family: monospace; background: transparent; padding:0; border-radius:0; border:none; color:rgba(255,255,255,0.72); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-decoration:none; }
 .qr-data:hover { color:#fff; text-decoration:underline; }
-.qr-copy-btn { align-self:flex-start; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.18); border-radius:0.55rem; padding:0.45rem 0.7rem; font-weight:850; cursor:pointer; }
+.qr-card-actions { display:flex; flex-wrap:wrap; align-items:center; gap:0.5rem; margin-top:0.1rem; }
+.qr-copy-btn,
+.qr-share-btn { display:inline-flex; align-items:center; justify-content:center; gap:0.4rem; min-height:2.2rem; background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.18); border-radius:0.55rem; padding:0.45rem 0.7rem; font-weight:850; cursor:pointer; }
+.qr-share-btn { background:#fff; color:#000; border-color:#fff; }
+.qr-share-btn i { color:#000; }
 .qr-copy-btn:hover { background:rgba(255,255,255,0.08); }
+.qr-share-btn:hover { background:#e5e7eb; }
 .qr-footer { display:flex; align-items:center; justify-content:space-between; font-size:0.75rem; color:#94a3b8; padding-top:0.75rem; border-top:1px solid rgba(255,255,255,0.05); }
 .qr-date { color:#94a3b8; }
 .qr-recreate { color:#60a5fa; font-weight:700; text-decoration:none; text-transform:uppercase; letter-spacing:0.08em; }
