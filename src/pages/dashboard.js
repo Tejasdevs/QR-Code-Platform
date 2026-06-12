@@ -16,6 +16,24 @@ export const DashboardPage = {
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
 
+        const getGreeting = () => {
+            const hour = new Date().getHours();
+
+            if (hour < 12) return 'Good morning';
+            if (hour < 17) return 'Good afternoon';
+            return 'Good evening';
+        };
+
+        const greetingEl = document.getElementById('greeting-text');
+        if (greetingEl) {
+            const updateGreeting = () => {
+                greetingEl.textContent = getGreeting();
+            };
+
+            updateGreeting();
+            window.setInterval(updateGreeting, 60000);
+        }
+
         const nameEl = document.getElementById('user-name');
         if (nameEl) nameEl.textContent = user.name;
 
