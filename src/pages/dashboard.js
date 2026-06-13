@@ -1,5 +1,5 @@
 import { setupLayoutEvents } from '../components/layout.js';
-import { auth, qrData, historyData } from '../utils/storage.js';
+import { auth, qrData } from '../utils/storage.js';
 
 export const DashboardPage = {
     afterRender: async () => {
@@ -7,7 +7,6 @@ export const DashboardPage = {
 
         const user    = auth.getCurrentUser() || { name: 'User' };
         const qrs     = qrData.getAll();
-        const history = historyData.getAll().slice(0, 5);
 
         const escapeHtml = (value = '') => String(value)
             .replace(/&/g, '&amp;')
@@ -58,17 +57,5 @@ export const DashboardPage = {
             `).join('');
         }
 
-        const activityEl = document.getElementById('activity-feed');
-        if (activityEl && history.length > 0) {
-            activityEl.innerHTML = history.map(item => `
-                <div class="dashboard-activity-item">
-                    <div class="dashboard-activity-icon"><i class="ph ph-check"></i></div>
-                    <div>
-                        <p class="dashboard-activity-title">${escapeHtml(item.action)}</p>
-                        <p class="dashboard-activity-date">${new Date(item.timestamp).toLocaleString()}</p>
-                    </div>
-                </div>
-            `).join('');
-        }
     }
 };

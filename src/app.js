@@ -12,6 +12,7 @@ import { FavoritesPage } from './pages/favorites.js';
 import { TrackPage }     from './pages/track.js';
 import { HistoryPage }   from './pages/history.js';
 import { SettingsPage }  from './pages/settings.js';
+import { HelpFaqPage }   from './pages/help-faq.js';
 import { ScanPage }      from './pages/scan.js';
 
 
@@ -59,6 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { path: '/history',   view: 'history',   afterRender: HistoryPage.afterRender,   protected: true, layout: true },
         
         { path: '/settings',  view: 'settings',  afterRender: SettingsPage.afterRender,  protected: true, layout: true },
+        { path: '/help-faq',  view: 'help-faq',  afterRender: HelpFaqPage.afterRender,   protected: true, layout: true },
         { path: '/scan',      view: 'scan',      afterRender: ScanPage.afterRender },
     ];
 
