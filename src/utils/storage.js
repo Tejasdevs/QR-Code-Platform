@@ -138,6 +138,16 @@ export const qrData = {
         storage.set('qrs', qrs);
         historyData.add(`Deleted a QR code`);
     },
+    toggleFavorite: (id) => {
+        const qrs = storage.get('qrs', []);
+        const index = qrs.findIndex(q => q.id === id);
+        if (index === -1) return null;
+
+        qrs[index] = { ...qrs[index], favorite: !qrs[index].favorite };
+        storage.set('qrs', qrs);
+        historyData.add(qrs[index].favorite ? 'Marked a QR code as favorite' : 'Removed a QR code from favorites');
+        return qrs[index];
+    },
     update: (id, updates) => {
         const qrs = storage.get('qrs', []);
         const index = qrs.findIndex(q => q.id === id);

@@ -8,6 +8,7 @@ import { SignupPage }    from './pages/signup.js';
 import { DashboardPage } from './pages/dashboard.js';
 import { GeneratorPage } from './pages/generator.js';
 import { MyQRsPage }     from './pages/my-qrs.js';
+import { FavoritesPage } from './pages/favorites.js';
 import { TrackPage }     from './pages/track.js';
 import { HistoryPage }   from './pages/history.js';
 import { SettingsPage }  from './pages/settings.js';
@@ -52,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { path: '/dashboard', view: 'dashboard', afterRender: DashboardPage.afterRender, protected: true, layout: true },
         { path: '/generator', view: 'generator', afterRender: GeneratorPage.afterRender, protected: true, layout: true },
         { path: '/my-qrs',    view: 'my-qrs',    afterRender: MyQRsPage.afterRender,     protected: true, layout: true },
+        { path: '/favorites', view: 'favorites', afterRender: FavoritesPage.afterRender, protected: true, layout: true },
         { path: '/track',     view: 'track',     afterRender: TrackPage.afterRender,     protected: true, layout: true },
         
         { path: '/history',   view: 'history',   afterRender: HistoryPage.afterRender,   protected: true, layout: true },

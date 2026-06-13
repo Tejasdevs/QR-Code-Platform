@@ -93,9 +93,46 @@ const shareQr = async (qr) => {
     }
 };
 
-const renderGrid = (qrs) => {
-    const grid     = document.getElementById('qr-grid');
-    const emptyEl  = document.getElementById('empty-state');
+const downloadQr = async (qr) => {
+    try {
+        const file = await getQrImageFile(qr);
+        if (!file) {
+            showToast('QR image is not ready yet.', 'error');
+            return;
+        }
+
+        const url = URL.createObjectURL(file);
+        const anchor = document.createElement('a');
+        anchor.href = url;
+        anchor.download = file.name;
+        anchor.click();
+        URL.revokeObjectURL(url);
+        showToast('QR code downloaded.', 'success');
+    } catch (err) {
+        showToast('Could not download QR code.', 'error');
+    }
+};
+
+export const renderQrGrid = (qrs, options = {}) => {
+    const {
+        gridId = 'qr-grid',
+        emptyId = 'empty-state',
+        getEmptyQrs = () => qrData.getAll(),
+        onChange = null
+    } = options;
+
+    const grid = document.getElementById(gridId);
+    const emptyEl = document.getElementById(emptyId);
+    if (!grid || !emptyEl) return;
+
+    const refresh = () => {
+        if (typeof onChange === 'function') {
+            onChange();
+            return;
+        }
+
+        renderQrGrid(getEmptyQrs(), options);
+    };
 
     if (!qrs.length) {
         grid.innerHTML = '';
@@ -108,9 +145,14 @@ const renderGrid = (qrs) => {
         <div class="card-qr group">
             <div class="qr-card-top">
                 <span class="qr-badge">${escapeHtml(qr.type)}</span>
-                <button data-id="${escapeHtml(qr.id)}" class="qr-delete-btn" aria-label="Delete ${escapeHtml(qr.name || qr.type + ' QR')}">
-                    <i class="ph ph-trash icon-lg"></i>
-                </button>
+                <div class="qr-card-tools">
+                    <button type="button" data-favorite-id="${escapeHtml(qr.id)}" class="qr-favorite-btn ${qr.favorite ? 'is-favorite' : ''}" aria-label="${qr.favorite ? 'Remove from favorites' : 'Add to favorites'}" aria-pressed="${qr.favorite ? 'true' : 'false'}">
+                        <i class="${qr.favorite ? 'ph-fill' : 'ph'} ph-star icon-lg"></i>
+                    </button>
+                    <button data-id="${escapeHtml(qr.id)}" class="qr-delete-btn" aria-label="Delete ${escapeHtml(qr.name || qr.type + ' QR')}">
+                        <i class="ph ph-trash icon-lg"></i>
+                    </button>
+                </div>
             </div>
 
             <div class="saved-qr-preview" data-qr-id="${escapeHtml(qr.id)}"></div>
@@ -128,6 +170,10 @@ const renderGrid = (qrs) => {
                     <button type="button" data-share-id="${escapeHtml(qr.id)}" class="qr-share-btn">
                         <i class="ph ph-share-network"></i>
                         Share
+                    </button>
+                    <button type="button" data-download-id="${escapeHtml(qr.id)}" class="qr-download-btn">
+                        <i class="ph ph-download-simple"></i>
+                        Download
                     </button>
                 </div>
             </div>
@@ -157,9 +203,22 @@ const renderGrid = (qrs) => {
         btn.addEventListener('click', () => {
             if (confirm('Delete this QR code permanently?')) {
                 qrData.delete(btn.dataset.id);
-                renderGrid(qrData.getAll());
+                refresh();
                 showToast('QR code deleted.', 'success');
             }
+        });
+    });
+
+    grid.querySelectorAll('.qr-favorite-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const qr = qrData.toggleFavorite(btn.dataset.favoriteId);
+            if (!qr) {
+                showToast('QR code not found.', 'error');
+                return;
+            }
+
+            showToast(qr.favorite ? 'Added to favorites.' : 'Removed from favorites.', 'success');
+            refresh();
         });
     });
 
@@ -190,12 +249,25 @@ const renderGrid = (qrs) => {
             await shareQr(qr);
         });
     });
+
+    grid.querySelectorAll('.qr-download-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const qr = qrs.find(item => String(item.id) === btn.dataset.downloadId);
+            if (!qr) {
+                showToast('QR code not found.', 'error');
+                return;
+            }
+
+            await downloadQr(qr);
+        });
+    });
 };
 
 export const MyQRsPage = {
     afterRender: async () => {
         setupLayoutEvents();
-        renderGrid(qrData.getAll());
+        const renderAll = () => renderQrGrid(qrData.getAll(), { onChange: renderAll });
+        renderAll();
 
         document.getElementById('search-input').addEventListener('input', e => {
             const term = e.target.value.toLowerCase();
@@ -204,7 +276,11 @@ export const MyQRsPage = {
                 qr.type.toLowerCase().includes(term) ||
                 (qr.data || '').toLowerCase().includes(term)
             );
-            renderGrid(filtered);
+            renderQrGrid(filtered, {
+                onChange: () => {
+                    e.target.dispatchEvent(new Event('input'));
+                }
+            });
         });
     }
 };
