@@ -182,6 +182,16 @@ export const historyData = {
 };
 
 export const settingsData = {
-    get: () => storage.get('settings', { theme: 'light', defaultColor: '#000000', defaultSize: 256 }),
+    get: () => {
+        const settings = storage.get('settings', {});
+        const normalizedSettings = {
+            theme: settings.theme || 'light',
+            defaultColor: settings.defaultColor || '#000000',
+            defaultSize: settings.defaultSize || 256
+        };
+
+        storage.set('settings', normalizedSettings);
+        return normalizedSettings;
+    },
     save: (settings) => storage.set('settings', settings)
 };

@@ -9,19 +9,16 @@ export const SettingsPage = {
         const settings = settingsData.get();
         const colorPicker = document.getElementById('setting-color');
         const colorText   = document.getElementById('setting-color-text');
-        const emailToggle = document.getElementById('setting-email-notifs');
         const qrPreview   = document.getElementById('setting-preview-qr');
 
         colorPicker.value = settings.defaultColor || '#ffffff';
         colorText.value   = settings.defaultColor || '#ffffff';
         qrPreview.style.color = colorPicker.value;
-        emailToggle.checked = !!settings.emailNotifs;
 
         const saveSettings = () => {
             settingsData.save({ 
                 ...settingsData.get(), 
-                defaultColor: colorPicker.value,
-                emailNotifs: emailToggle.checked
+                defaultColor: colorPicker.value
             });
             showToast('Settings updated.', 'success');
         };
@@ -38,10 +35,6 @@ export const SettingsPage = {
                 qrPreview.style.color = e.target.value;
                 saveSettings();
             }
-        });
-
-        emailToggle.addEventListener('change', () => {
-            saveSettings();
         });
 
         document.getElementById('clear-data-btn').addEventListener('click', () => {
