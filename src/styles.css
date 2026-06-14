@@ -1016,6 +1016,30 @@
 .sidebar-name { color:#fff; font-size:0.9rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 .nav-action-logout { background:transparent; border:none; color:#94a3b8; padding:0.25rem; border-radius:0.5rem; }
 .nav-action-logout:hover { color:#ff9b9b; background: rgba(255,0,0,0.02); }
+
+/* Logout confirmation modal */
+.logout-modal { position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:1rem; opacity:0; pointer-events:none; transition:opacity .18s ease; }
+.logout-modal.hidden { display:none; }
+.logout-modal.is-open { opacity:1; pointer-events:auto; }
+.logout-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.72); backdrop-filter:blur(8px); }
+.logout-modal-card { position:relative; width:min(100%,26rem); padding:1.25rem; border:1px solid rgba(255,255,255,0.14); border-radius:0.85rem; background:#000; color:#fff; box-shadow:0 24px 70px rgba(0,0,0,0.48); transform:translateY(10px) scale(0.98); transition:transform .18s ease; }
+.logout-modal.is-open .logout-modal-card { transform:translateY(0) scale(1); }
+.logout-modal-card h2 { margin:0; color:#fff; font-size:1.25rem; line-height:1.2; font-weight:900; }
+.logout-modal-card p { margin:0.65rem 0 0; color:rgba(255,255,255,0.68); line-height:1.55; }
+.logout-modal-actions { display:flex; justify-content:flex-end; gap:0.65rem; margin-top:1.25rem; }
+.logout-modal-cancel,
+.logout-modal-confirm { min-height:2.55rem; padding:0.65rem 1rem; border-radius:0.65rem; font-weight:850; cursor:pointer; }
+.logout-modal-cancel { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.22); }
+.logout-modal-cancel:hover { background:rgba(255,255,255,0.08); }
+.logout-modal-confirm { background:#fff; color:#000; border:1px solid #fff; }
+.logout-modal-confirm:hover { background:#e5e7eb; }
+
+@media (max-width: 520px) {
+    .logout-modal-card { padding:1rem; }
+    .logout-modal-actions { flex-direction:column-reverse; }
+    .logout-modal-cancel,
+    .logout-modal-confirm { width:100%; }
+}
 .mobile-button { background:transparent; border:none; padding:0.25rem; color:#cbd5e1; }
 .mobile-divider { height:1px; background:rgba(255,255,255,0.05); margin:0.75rem 0; }
 .nav-link-block { display:block; width:100%; text-align:left; }
