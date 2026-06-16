@@ -11,6 +11,7 @@ const inputTemplates = {
         <div>
             <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="My Website" class="premium-input">
+            <p class="input-hint">Leave blank to auto-name this QR.</p>
         </div>`,
     Text: `
         <div>
@@ -20,6 +21,7 @@ const inputTemplates = {
         <div>
             <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="My Note" class="premium-input">
+            <p class="input-hint">Leave blank to auto-name this QR.</p>
         </div>`,
     WhatsApp: `
         <div>
@@ -33,6 +35,7 @@ const inputTemplates = {
         <div>
             <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="WhatsApp Contact" class="premium-input">
+            <p class="input-hint">Leave blank to auto-name this QR.</p>
         </div>`,
     WiFi: `
         <div>
@@ -54,6 +57,7 @@ const inputTemplates = {
         <div>
             <label class="form-label">Name (optional)</label>
             <input type="text" id="input-name" placeholder="Office WiFi" class="premium-input">
+            <p class="input-hint">Leave blank to auto-name this QR.</p>
         </div>`
 };
 
@@ -139,7 +143,7 @@ export const GeneratorPage = {
         saveBtn.addEventListener('click', () => {
             const type   = document.querySelector('input[name="qr_type"]:checked').value;
             const nameEl = document.getElementById('input-name');
-            qrData.save({ id: currentQRId || Date.now().toString(), type, name: nameEl ? nameEl.value : '', data: currentDataStr, color: colorPicker.value, bg: bgPicker.value });
+            qrData.save({ id: currentQRId || Date.now().toString(), type, name: nameEl ? nameEl.value.trim() : '', data: currentDataStr, color: colorPicker.value, bg: bgPicker.value });
             document.getElementById('save-success').classList.remove('hidden');
             showToast('QR code saved to My QR Codes.', 'success');
         });

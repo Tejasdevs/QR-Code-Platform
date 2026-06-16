@@ -38,6 +38,25 @@ const readStoredArray = (key) => {
     return values.flatMap(value => Array.isArray(value) ? value : []);
 };
 
+const getUniqueQrName = (baseName, qrs) => {
+    const normalizedBaseName = String(baseName || 'QR Code').trim() || 'QR Code';
+    const existingNames = new Set(qrs.map(qr => String(qr.name || '').trim().toLowerCase()));
+
+    if (!existingNames.has(normalizedBaseName.toLowerCase())) {
+        return normalizedBaseName;
+    }
+
+    let count = 2;
+    let nextName = `${normalizedBaseName} (${count})`;
+
+    while (existingNames.has(nextName.toLowerCase())) {
+        count += 1;
+        nextName = `${normalizedBaseName} (${count})`;
+    }
+
+    return nextName;
+};
+
 export const auth = {
     normalizeEmail: (email = '') => email.trim().toLowerCase(),
     normalizePassword: (password = '') => String(password).trim(),
@@ -126,7 +145,15 @@ export const qrData = {
     getAll: () => storage.get('qrs', []),
     save: (qr) => {
         const qrs = storage.get('qrs', []);
-        const newQR = { ...qr, id: qr.id || Date.now().toString(), createdAt: qr.createdAt || new Date().toISOString() };
+        const createdAt = qr.createdAt || new Date().toISOString();
+        const fallbackName = `${qr.type || 'QR'} QR - ${new Date(createdAt).toLocaleDateString(undefined, { day: 'numeric', month: 'short' })}`;
+        const baseName = String(qr.name || '').trim() || fallbackName;
+        const newQR = {
+            ...qr,
+            id: qr.id || Date.now().toString(),
+            name: getUniqueQrName(baseName, qrs),
+            createdAt
+        };
         qrs.unshift(newQR);
         storage.set('qrs', qrs);
         historyData.add(`Generated a new ${qr.type} QR code`);
