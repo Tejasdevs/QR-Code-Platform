@@ -1067,10 +1067,12 @@
 .preview-box { width:5.75rem; height:5.75rem; flex:0 0 auto; background:#fff; border-radius:0.7rem; display:flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.08); overflow:hidden; }
 .preview-qr { font-size:2.55rem; color:#111; }
 .divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:0.9rem 0; }
-.danger-box { background: rgba(220,38,38,0.06); border-radius:0.75rem; padding:1rem; border:1px solid rgba(220,38,38,0.08); }
-.danger-title { color:#fff; font-weight:700; margin:0 0 0.5rem 0; }
-.danger-text { color:#94a3b8; margin-bottom:0.75rem; }
-.danger-btn { background: rgba(220,38,38,0.12); color:#fca5a5; border:1px solid rgba(220,38,38,0.16); padding:0.5rem 1rem; border-radius:0.75rem; }
+.danger-box { display:flex; align-items:center; justify-content:space-between; gap:1rem; background:rgba(255,255,255,0.02); border-radius:0.75rem; padding:1rem; border:1px solid rgba(255,255,255,0.10); }
+.danger-title { color:#fff; font-weight:850; margin:0 0 0.45rem 0; }
+.danger-text { color:rgba(255,255,255,0.62); margin:0; line-height:1.55; }
+.danger-btn { flex:0 0 auto; background:#fff; color:#000; border:1px solid #fff; padding:0.6rem 1rem; border-radius:0.65rem; font-weight:850; cursor:pointer; transition:background-color .15s ease, border-color .15s ease, transform .15s ease; }
+.danger-btn:hover { background:#e5e7eb; border-color:#e5e7eb; }
+.danger-btn:active { background:#d1d5db; border-color:#d1d5db; transform:translateY(1px); }
 .settings-msg { display:none; margin-top:1rem; padding:0.75rem; border-radius:0.75rem; color:#10b981; background: rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); }
 .settings-msg.visible { display:block; }
 
@@ -1079,6 +1081,7 @@
     .settings-wrap .page-header { display:block; }
     .settings-card { padding:1rem; }
     .settings-preview { align-items:flex-start; flex-direction:column; }
+    .danger-box { align-items:flex-start; flex-direction:column; }
     .preview-box { width:5.5rem; height:5.5rem; }
 }
 
