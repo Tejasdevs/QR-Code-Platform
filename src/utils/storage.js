@@ -63,7 +63,8 @@ export const auth = {
     normalizeUser: (user = {}) => ({
         name: String(user.name || 'User').trim() || 'User',
         email: auth.normalizeEmail(user.email),
-        password: auth.normalizePassword(user.password)
+        password: auth.normalizePassword(user.password),
+        createdAt: user.createdAt || user.joinedAt || null
     }),
     getUsers: () => {
         const users = readStoredArray('users')
@@ -97,7 +98,7 @@ export const auth = {
             throw new Error('An account with this email already exists.');
         }
 
-        users.push({ name, email, password });
+        users.push({ name, email, password, createdAt: new Date().toISOString() });
         storage.set('users', users);
         storage.remove('currentUser');
 
@@ -124,6 +125,7 @@ export const auth = {
         storage.set('currentUser', {
             name: user.name,
             email: auth.normalizeEmail(user.email),
+            createdAt: user.createdAt || null,
             authenticatedAt: new Date().toISOString()
         });
 
