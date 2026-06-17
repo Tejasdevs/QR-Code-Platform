@@ -1,32 +1,141 @@
-Local development server
+# Scanify
 
-Options to run the site locally (from project root):
+Scanify is a clean, dark-themed QR code platform for generating, saving, managing, sharing, and organizing QR codes directly in the browser.
 
-- If you have Node.js + npm installed:
+The project is currently frontend-only and uses localStorage for authentication, QR data, history, favorites, settings, and scan-related data.
+
+## Important Note
+
+This project does not have a backend yet.
+
+All data is stored in the user's browser using localStorage. That means accounts, QR codes, favorites, history, settings, and scan data are local to the current browser/device.
+
+Backend integration is planned for the future. A backend will later be added for real user accounts, database storage, real scan analytics, secure authentication, and cross-device data sync.
+
+## Features
+
+- User signup and login flow
+- Protected dashboard pages
+- QR code generator
+- Supported QR types:
+  - URL
+  - Text
+  - WhatsApp
+  - WiFi
+- Manage saved QR codes
+- QR preview and download
+- Share QR codes using the Web Share API where supported
+- Favorites page for important QR codes
+- History page for activity logs
+- Profile page with user information
+- Settings page for default QR color
+- Help and FAQ section
+- Toast notifications for clean success/error feedback
+- Responsive dark UI
+
+## Pages
+
+- Landing page
+- Login
+- Signup
+- Dashboard
+- Create QR
+- My QR Codes
+- Favorites
+- Track
+- History
+- Profile
+- Help and FAQ
+- Settings
+
+## Tech Stack
+
+- HTML
+- CSS
+- JavaScript
+- ES Modules
+- localStorage
+- Phosphor Icons
+- QRCode.js
+
+## Local Setup
+
+This app must be served through a local HTTP server. Opening `index.html` directly with `file://` will not work because the app loads views using `fetch()`.
+
+### Option 1: Node.js
+
+Install dependencies:
 
 ```bash
 npm install
+```
+
+Start the local server:
+
+```bash
 npm start
 ```
 
-Then open http://localhost:3000
+Open:
 
-- If you don't have Node, with Python 3 installed:
-
-```bash
-cd "c:\Users\chamo\OneDrive\Desktop\tejas\QR Code Platform"
-python -m http.server 8000
+```text
+http://localhost:3000
 ```
 
-- On Windows without Python, use the bundled PowerShell server:
+### Option 2: PowerShell Server
+
+From the project root:
 
 ```powershell
-cd "C:\Users\chamo\OneDrive\Desktop\tejas\QR Code Platform"
 ./serve.ps1
 ```
 
-Then open http://localhost:8000
+Then open the URL shown in the terminal.
 
-Notes:
-- This project uses ES modules and `fetch()` to load views, so files must be served over HTTP (file:// will fail).
-- If you still see errors, open the browser devtools console and share the error text and I'll fix code issues.
+## Project Structure
+
+```text
+src/
+  components/     Shared layout logic
+  pages/          Page-specific JavaScript
+  utils/          Router, storage, toast, tracking helpers
+  views/          HTML views loaded by the router
+  styles.css      Main styling
+index.html        App entry point
+package.json      Local server scripts
+serve.ps1         PowerShell local server
+```
+
+## Data Storage
+
+Scanify currently stores data in localStorage. Main stored data includes:
+
+- Registered users
+- Current logged-in user session
+- Generated QR codes
+- Favorite QR codes
+- Activity history
+- App settings
+- Local scan records
+
+Because there is no backend yet, clearing browser data will remove saved Scanify data from that browser.
+
+## Upcoming Backend Plan
+
+The backend will be integrated later. Planned backend improvements include:
+
+- Secure authentication
+- User database
+- Cloud-saved QR codes
+- Real scan tracking
+- Cross-device access
+- Better analytics
+- Account management
+
+## Author
+
+Built by Tejas Chamola.
+
+## License
+
+This project is for learning and portfolio use.
