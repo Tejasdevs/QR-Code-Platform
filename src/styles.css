@@ -979,6 +979,17 @@
 .password-toggle:hover,
 .password-toggle:focus-visible { color:#fff; background:rgba(255,255,255,0.10); border-color:rgba(255,255,255,0.16); outline:none; }
 .password-toggle:active { background:rgba(255,255,255,0.16); }
+.remember-row { display:flex; align-items:center; gap:0.75rem; padding:0.8rem 0.85rem; border:1px solid rgba(255,255,255,0.12); border-radius:0.75rem; background:rgba(255,255,255,0.025); cursor:pointer; user-select:none; transition:border-color .18s ease, background .18s ease; }
+.remember-row:hover { border-color:rgba(255,255,255,0.22); background:rgba(255,255,255,0.045); }
+.remember-checkbox { position:absolute; opacity:0; pointer-events:none; }
+.remember-box { width:1.15rem; height:1.15rem; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.32); border-radius:0.35rem; color:#000; background:transparent; transition:background .18s ease, border-color .18s ease, color .18s ease; }
+.remember-box i { font-size:0.9rem; opacity:0; transform:scale(0.8); transition:opacity .18s ease, transform .18s ease; }
+.remember-checkbox:checked + .remember-box { background:#fff; border-color:#fff; color:#000; }
+.remember-checkbox:checked + .remember-box i { opacity:1; transform:scale(1); }
+.remember-checkbox:focus-visible + .remember-box { outline:2px solid rgba(255,255,255,0.32); outline-offset:3px; }
+.remember-copy { display:flex; flex-direction:column; gap:0.15rem; min-width:0; }
+.remember-copy strong { color:#fff; font-size:0.9rem; line-height:1.2; }
+.remember-copy small { color:rgba(255,255,255,0.58); font-size:0.78rem; line-height:1.35; }
 .form-row-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem; }
 .link-forgot { color:#fff; font-size:0.82rem; text-decoration:none; }
 .link-forgot:hover { text-decoration:underline; }

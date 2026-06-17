@@ -23,6 +23,28 @@ export const storage = {
     }
 };
 
+const sessionStorageApi = {
+    get: (key, defaultValue = null) => {
+        try {
+            const item = sessionStorage.getItem(PREFIX + key);
+            return item ? JSON.parse(item) : defaultValue;
+        } catch (e) {
+            console.error('Error reading from sessionStorage', e);
+            return defaultValue;
+        }
+    },
+    set: (key, value) => {
+        try {
+            sessionStorage.setItem(PREFIX + key, JSON.stringify(value));
+        } catch (e) {
+            console.error('Error writing to sessionStorage', e);
+        }
+    },
+    remove: (key) => {
+        sessionStorage.removeItem(PREFIX + key);
+    }
+};
+
 const readStoredArray = (key) => {
     const values = [storage.get(key, [])];
 
@@ -101,10 +123,11 @@ export const auth = {
         users.push({ name, email, password, createdAt: new Date().toISOString() });
         storage.set('users', users);
         storage.remove('currentUser');
+        sessionStorageApi.remove('currentUser');
 
         return { name, email };
     },
-    login: (email, password) => {
+    login: (email, password, rememberMe = false) => {
         const normalizedEmail = auth.normalizeEmail(email);
         const enteredPassword = auth.normalizePassword(password);
 
@@ -122,23 +145,43 @@ export const auth = {
             throw new Error('Invalid email or password');
         }
 
-        storage.set('currentUser', {
+        const currentUser = {
             name: user.name,
             email: auth.normalizeEmail(user.email),
             createdAt: user.createdAt || null,
-            authenticatedAt: new Date().toISOString()
-        });
+            authenticatedAt: new Date().toISOString(),
+            rememberMe: !!rememberMe
+        };
+
+        storage.remove('currentUser');
+        sessionStorageApi.remove('currentUser');
+
+        if (rememberMe) {
+            storage.set('currentUser', currentUser);
+        } else {
+            sessionStorageApi.set('currentUser', currentUser);
+        }
 
         return user;
     },
     logout: () => {
         storage.remove('currentUser');
+        sessionStorageApi.remove('currentUser');
     },
     getCurrentUser: () => {
-        return storage.get('currentUser');
+        const sessionUser = sessionStorageApi.get('currentUser');
+        if (sessionUser && sessionUser.email) return sessionUser;
+
+        const persistentUser = storage.get('currentUser');
+        if (persistentUser && persistentUser.email && persistentUser.rememberMe === true) {
+            return persistentUser;
+        }
+
+        if (persistentUser) storage.remove('currentUser');
+        return null;
     },
     isAuthenticated: () => {
-        const currentUser = storage.get('currentUser');
+        const currentUser = auth.getCurrentUser();
         return !!(currentUser && currentUser.email);
     }
 };

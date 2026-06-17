@@ -8,11 +8,18 @@ export const LoginPage = {
         const successMsg = document.getElementById('success-msg');
         const passwordInput = document.getElementById('password');
         const passwordToggle = document.getElementById('password-toggle');
+        const rememberInput = document.getElementById('remember-me');
 
         if (window.location.hash.includes('signup=success') && successMsg) {
             successMsg.textContent = 'Account created successfully. Please log in with your email and password.';
             successMsg.className = 'alert-success';
             showToast('Account created. Please log in.', 'success');
+        }
+
+        if (window.location.hash.includes('logout=success') && successMsg) {
+            successMsg.textContent = 'Signed out successfully.';
+            successMsg.className = 'alert-success';
+            showToast('Signed out successfully.', 'success');
         }
 
         if (passwordInput && passwordToggle) {
@@ -33,7 +40,7 @@ export const LoginPage = {
             errorMsg.textContent = '';
 
             try {
-                auth.login(email, password);
+                auth.login(email, password, !!rememberInput.checked);
                 const closeSuccessToast = showToast('Signed in successfully.', 'success', 1100);
                 setTimeout(() => {
                     closeSuccessToast();
