@@ -2,19 +2,20 @@
 
 Scanify is a clean, dark-themed QR code platform for generating, saving, managing, sharing, and organizing QR codes directly in the browser.
 
-The project is currently frontend-only and uses localStorage for authentication, QR data, history, favorites, settings, and scan-related data.
+The project is currently frontend-only and uses browser storage for authentication sessions, QR data, history, favorites, settings, and scan-related data.
 
 ## Important Note
 
 This project does not have a backend yet.
 
-All data is stored in the user's browser using localStorage. That means accounts, QR codes, favorites, history, settings, and scan data are local to the current browser/device.
+All data is stored in the user's browser. Persistent app data is stored with localStorage, and temporary login sessions use sessionStorage when Remember Me is not enabled. That means accounts, QR codes, favorites, history, settings, and scan data are local to the current browser/device.
 
 Backend integration is planned for the future. A backend will later be added for real user accounts, database storage, real scan analytics, secure authentication, and cross-device data sync.
 
 ## Features
 
 - User signup and login flow
+- Remember Me login sessions
 - Protected dashboard pages
 - QR code generator
 - Supported QR types:
@@ -55,6 +56,7 @@ Backend integration is planned for the future. A backend will later be added for
 - JavaScript
 - ES Modules
 - localStorage
+- sessionStorage
 - Phosphor Icons
 - QRCode.js
 
@@ -108,7 +110,7 @@ serve.ps1         PowerShell local server
 
 ## Data Storage
 
-Scanify currently stores data in localStorage. Main stored data includes:
+Scanify currently stores data in browser storage. Main stored data includes:
 
 - Registered users
 - Current logged-in user session
@@ -117,6 +119,11 @@ Scanify currently stores data in localStorage. Main stored data includes:
 - Activity history
 - App settings
 - Local scan records
+
+Remember Me behavior:
+
+- Enabled: the user session is stored persistently and remains active until manual logout.
+- Disabled: the user session is temporary and ends when the browser session closes.
 
 Because there is no backend yet, clearing browser data will remove saved Scanify data from that browser.
 
