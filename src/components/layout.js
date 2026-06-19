@@ -47,7 +47,7 @@ export const setupLayoutEvents = () => {
             window.__scanifyLogoutKeyHandler = null;
         }
         auth.logout();
-        window.location.hash = '#/login?logout=success';
+        window.location.hash = '#/?logout=success';
     };
 
     modal.querySelectorAll('[data-logout-cancel]').forEach(btn => {

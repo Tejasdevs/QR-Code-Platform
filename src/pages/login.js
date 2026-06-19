@@ -16,12 +16,6 @@ export const LoginPage = {
             showToast('Account created. Please log in.', 'success');
         }
 
-        if (window.location.hash.includes('logout=success') && successMsg) {
-            successMsg.textContent = 'Signed out successfully.';
-            successMsg.className = 'alert-success';
-            showToast('Signed out successfully.', 'success');
-        }
-
         if (passwordInput && passwordToggle) {
             passwordToggle.addEventListener('click', () => {
                 const shouldShowPassword = passwordInput.type === 'password';
