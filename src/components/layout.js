@@ -82,19 +82,26 @@ export const setupLayoutEvents = () => {
     const mobileMenuPanel = document.getElementById('mobile-menu-panel');
 
     const openMenu = () => {
-        mobileMenu.classList.remove('hidden');
+        if (!mobileMenu || !mobileMenuPanel) return;
+        mobileMenu.classList.add('is-open');
         requestAnimationFrame(() => {
             mobileMenu.style.opacity = '1';
             mobileMenuPanel.style.transform = 'translateX(0)';
         });
     };
     const closeMenu = () => {
+        if (!mobileMenu || !mobileMenuPanel) return;
         mobileMenu.style.opacity = '0';
         mobileMenuPanel.style.transform = 'translateX(100%)';
-        setTimeout(() => mobileMenu.classList.add('hidden'), 300);
+        setTimeout(() => mobileMenu.classList.remove('is-open'), 300);
     };
 
     if (mobileMenuBtn)  mobileMenuBtn.addEventListener('click', openMenu);
     if (closeMobileBtn) closeMobileBtn.addEventListener('click', closeMenu);
     if (mobileMenu)     mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
+    if (mobileMenuPanel) {
+        mobileMenuPanel.querySelectorAll('a.nav-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    }
 };
