@@ -17,6 +17,7 @@ Backend integration is planned for the future. A backend will later be added for
 - User signup and login flow
 - Remember Me login sessions
 - Protected dashboard pages
+- Dashboard profile avatar shortcut
 - QR code generator
 - Supported QR types:
   - URL
@@ -29,7 +30,7 @@ Backend integration is planned for the future. A backend will later be added for
 - Favorites page for important QR codes
 - History page for activity logs
 - Profile page with user information
-- Settings page for default QR color
+- Settings page for default QR color and password changes
 - Help and FAQ section
 - Toast notifications for clean success/error feedback
 - Responsive dark UI
@@ -119,6 +120,12 @@ Scanify currently stores data in browser storage. Main stored data includes:
 - Activity history
 - App settings
 - Local scan records
+
+Account security:
+
+- Users can change their password from Settings.
+- Password updates validate the current password, new password length, and confirmation match.
+- Updated passwords are stored locally with the browser-based account data.
 
 Remember Me behavior:
 
