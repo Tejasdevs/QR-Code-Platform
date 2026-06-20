@@ -1,5 +1,5 @@
 import { setupLayoutEvents } from '../components/layout.js';
-import { settingsData } from '../utils/storage.js';
+import { auth, settingsData } from '../utils/storage.js';
 import { showToast } from '../utils/toast.js';
 
 export const SettingsPage = {
@@ -34,6 +34,43 @@ export const SettingsPage = {
                 colorPicker.value = e.target.value;
                 qrPreview.style.color = e.target.value;
                 saveSettings();
+            }
+        });
+
+        document.querySelectorAll('.settings-password-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const input = document.getElementById(button.dataset.passwordToggle);
+                if (!input) return;
+
+                const shouldShowPassword = input.type === 'password';
+                input.type = shouldShowPassword ? 'text' : 'password';
+                button.setAttribute('aria-label', `${shouldShowPassword ? 'Hide' : 'Show'} ${input.labels?.[0]?.textContent?.toLowerCase() || 'password'}`);
+                button.setAttribute('aria-pressed', String(shouldShowPassword));
+                button.innerHTML = `<i class="ph ${shouldShowPassword ? 'ph-eye-slash' : 'ph-eye'}"></i>`;
+            });
+        });
+
+        const passwordForm = document.getElementById('change-password-form');
+        passwordForm.addEventListener('submit', e => {
+            e.preventDefault();
+
+            const currentPassword = document.getElementById('current-password').value;
+            const newPassword = document.getElementById('new-password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            try {
+                auth.changePassword({ currentPassword, newPassword, confirmPassword });
+                passwordForm.reset();
+                passwordForm.querySelectorAll('.password-field .form-input').forEach(input => {
+                    input.type = 'password';
+                });
+                passwordForm.querySelectorAll('.settings-password-toggle').forEach(button => {
+                    button.setAttribute('aria-pressed', 'false');
+                    button.innerHTML = '<i class="ph ph-eye"></i>';
+                });
+                showToast('Password updated successfully.', 'success');
+            } catch (error) {
+                showToast(error.message || 'Unable to update password.', 'error');
             }
         });
 

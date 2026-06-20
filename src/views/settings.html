@@ -27,6 +27,51 @@
 
         <hr class="divider">
 
+        <h3 class="section-title">Security</h3>
+        <form id="change-password-form" class="settings-password-form" autocomplete="off">
+            <div class="setting-row">
+                <label for="current-password" class="form-label">Current password</label>
+                <div class="password-field">
+                    <input type="password" id="current-password" required autocomplete="current-password" class="form-input" placeholder="Enter current password">
+                    <button type="button" class="password-toggle settings-password-toggle" data-password-toggle="current-password" aria-label="Show current password" aria-pressed="false">
+                        <i class="ph ph-eye"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="settings-password-grid">
+                <div class="setting-row">
+                    <label for="new-password" class="form-label">New password</label>
+                    <div class="password-field">
+                        <input type="password" id="new-password" required autocomplete="new-password" minlength="6" class="form-input" placeholder="Min. 6 characters">
+                        <button type="button" class="password-toggle settings-password-toggle" data-password-toggle="new-password" aria-label="Show new password" aria-pressed="false">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="setting-row">
+                    <label for="confirm-password" class="form-label">Confirm password</label>
+                    <div class="password-field">
+                        <input type="password" id="confirm-password" required autocomplete="new-password" minlength="6" class="form-input" placeholder="Repeat new password">
+                        <button type="button" class="password-toggle settings-password-toggle" data-password-toggle="confirm-password" aria-label="Show confirm password" aria-pressed="false">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-form-actions">
+                <p class="note">Updates the password for this local account.</p>
+                <button type="submit" class="settings-save-btn">
+                    <i class="ph ph-lock-key icon-lg"></i>
+                    <span>Update Password</span>
+                </button>
+            </div>
+        </form>
+
+        <hr class="divider">
+
         <h3 class="section-title">Danger Zone</h3>
         <div class="danger-box">
             <div>

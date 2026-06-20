@@ -164,6 +164,56 @@ export const auth = {
 
         return user;
     },
+    changePassword: ({ currentPassword, newPassword, confirmPassword }) => {
+        const currentUser = auth.getCurrentUser();
+        if (!currentUser || !currentUser.email) {
+            throw new Error('Please log in again to change your password.');
+        }
+
+        const current = auth.normalizePassword(currentPassword);
+        const next = auth.normalizePassword(newPassword);
+        const confirm = auth.normalizePassword(confirmPassword);
+
+        if (!current || !next || !confirm) {
+            throw new Error('Please fill all password fields.');
+        }
+        if (next.length < 6) {
+            throw new Error('New password must be at least 6 characters.');
+        }
+        if (next !== confirm) {
+            throw new Error('New password and confirm password do not match.');
+        }
+        if (current === next) {
+            throw new Error('New password must be different from current password.');
+        }
+
+        const users = auth.getUsers();
+        const userIndex = users.findIndex(user => user.email === currentUser.email);
+
+        if (userIndex === -1) {
+            throw new Error('Account not found. Please log in again.');
+        }
+        if (users[userIndex].password !== current) {
+            throw new Error('Current password is incorrect.');
+        }
+
+        users[userIndex] = { ...users[userIndex], password: next };
+        storage.set('users', users);
+
+        const updatedCurrentUser = {
+            ...currentUser,
+            authenticatedAt: new Date().toISOString()
+        };
+
+        if (currentUser.rememberMe === true) {
+            storage.set('currentUser', updatedCurrentUser);
+        } else {
+            sessionStorageApi.set('currentUser', updatedCurrentUser);
+        }
+
+        historyData.add('Changed account password');
+        return true;
+    },
     logout: () => {
         storage.remove('currentUser');
         sessionStorageApi.remove('currentUser');
