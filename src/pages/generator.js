@@ -98,6 +98,7 @@ export const GeneratorPage = {
         let currentQRCode    = null;
         let currentDataStr   = '';
         let currentQRId      = '';
+        let hasGeneratedQr   = false;
 
         const renderInputs = (type) => {
             dynamicInputs.innerHTML = inputTemplates[type] || '';
@@ -123,24 +124,36 @@ export const GeneratorPage = {
                 return;
             }
 
+            if (!window.QRCode) {
+                hasGeneratedQr = false;
+                showToast('QR generator could not load. Please check your internet connection and refresh.', 'error');
+                return;
+            }
+
             document.getElementById('qr-placeholder').style.display = 'none';
             qrContainer.innerHTML = '';
 
-            currentQRCode = new QRCode(qrContainer, {
+            currentQRCode = new window.QRCode(qrContainer, {
                 text: currentDataStr,
                 width: 220,
                 height: 220,
                 colorDark:  colorPicker.value,
                 colorLight: bgPicker.value,
-                correctLevel: QRCode.CorrectLevel.H
+                correctLevel: window.QRCode.CorrectLevel.H
             });
 
+            hasGeneratedQr = true;
             document.getElementById('qr-actions').classList.remove('hidden');
             document.getElementById('save-success').classList.add('hidden');
             showToast('QR code generated successfully.', 'success');
         });
 
         saveBtn.addEventListener('click', () => {
+            if (!hasGeneratedQr || !currentDataStr.trim()) {
+                showToast('Generate a QR code before saving.', 'error');
+                return;
+            }
+
             const type   = document.querySelector('input[name="qr_type"]:checked').value;
             const nameEl = document.getElementById('input-name');
             qrData.save({ id: currentQRId || Date.now().toString(), type, name: nameEl ? nameEl.value.trim() : '', data: currentDataStr, color: colorPicker.value, bg: bgPicker.value });

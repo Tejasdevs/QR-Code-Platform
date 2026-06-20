@@ -26,25 +26,39 @@ export const TrackPage = {
         setupLayoutEvents();
 
         const renderTrackData = () => {
+            const totalEl = document.getElementById('track-total');
+            const todayEl = document.getElementById('track-today');
+            const weekEl = document.getElementById('track-week');
+            const recentEl = document.getElementById('recent-scans');
+            const performanceEl = document.getElementById('qr-performance');
+
+            if (!totalEl || !todayEl || !weekEl || !recentEl || !performanceEl) {
+                if (window.scanifyTrackInterval) {
+                    clearInterval(window.scanifyTrackInterval);
+                    window.scanifyTrackInterval = null;
+                }
+                return;
+            }
+
             const qrs = qrData.getAll();
             const scans = scanData.getAll();
             const today = startOfToday();
             const week = startOfWeek();
 
-            document.getElementById('track-total').textContent = scans.length;
-            document.getElementById('track-today').textContent = scans.filter(scan => new Date(scan.scannedAt) >= today).length;
-            document.getElementById('track-week').textContent = scans.filter(scan => new Date(scan.scannedAt) >= week).length;
+            totalEl.textContent = scans.length;
+            todayEl.textContent = scans.filter(scan => new Date(scan.scannedAt) >= today).length;
+            weekEl.textContent = scans.filter(scan => new Date(scan.scannedAt) >= week).length;
 
-            const recentEl = document.getElementById('recent-scans');
             if (!scans.length) {
                 recentEl.innerHTML = emptyState('No scans yet.');
             } else {
                 recentEl.innerHTML = scans.slice(0, 8).map(scan => {
                     const qr = qrs.find(item => item.id === scan.qrId);
+                    const qrLabel = qr ? (qr.name || `${qr.type} QR`) : 'Deleted QR';
                     return `
                         <div class="track-row">
                             <div>
-                                <strong>${qr?.name || qr?.type + ' QR' || 'Deleted QR'}</strong>
+                                <strong>${qrLabel}</strong>
                                 <span>${formatDateTime(scan.scannedAt)}</span>
                             </div>
                             <p>${qr?.data || 'Original QR no longer exists'}</p>
@@ -53,7 +67,6 @@ export const TrackPage = {
                 }).join('');
             }
 
-            const performanceEl = document.getElementById('qr-performance');
             if (!qrs.length) {
                 performanceEl.innerHTML = emptyState('Create a QR code to start tracking scans.');
             } else {

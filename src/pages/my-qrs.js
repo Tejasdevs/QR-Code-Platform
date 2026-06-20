@@ -187,16 +187,26 @@ export const renderQrGrid = (qrs, options = {}) => {
 
     qrs.forEach(qr => {
         const target = grid.querySelector(`[data-qr-id="${CSS.escape(qr.id)}"]`);
-        if (target && qr.data && window.QRCode) {
-            new QRCode(target, {
+        if (!target || !qr.data) return;
+
+        if (!window.QRCode) {
+            target.innerHTML = `
+                <div class="saved-qr-fallback">
+                    <i class="ph ph-qr-code"></i>
+                    <span>Preview unavailable</span>
+                </div>
+            `;
+            return;
+        }
+
+        new window.QRCode(target, {
                 text: qr.data,
                 width: 132,
                 height: 132,
                 colorDark: '#000000',
                 colorLight: '#ffffff',
-                correctLevel: QRCode.CorrectLevel.H
-            });
-        }
+                correctLevel: window.QRCode.CorrectLevel.H
+        });
     });
 
     grid.querySelectorAll('.qr-delete-btn').forEach(btn => {
