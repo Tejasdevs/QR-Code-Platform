@@ -23,6 +23,13 @@ export const DashboardPage = {
             return 'Good evening';
         };
 
+        const getInitials = (name = 'User') => {
+            const parts = String(name).trim().split(/\s+/).filter(Boolean);
+            if (parts.length === 0) return 'U';
+            if (parts.length === 1) return parts[0].charAt(0).toUpperCase();
+            return `${parts[0].charAt(0)}${parts[parts.length - 1].charAt(0)}`.toUpperCase();
+        };
+
         const greetingEl = document.getElementById('greeting-text');
         if (greetingEl) {
             const updateGreeting = () => {
@@ -35,6 +42,9 @@ export const DashboardPage = {
 
         const nameEl = document.getElementById('user-name');
         if (nameEl) nameEl.textContent = user.name;
+
+        const profileAvatarEl = document.getElementById('dashboard-profile-avatar');
+        if (profileAvatarEl) profileAvatarEl.textContent = getInitials(user.name);
 
         document.getElementById('stat-total').textContent    = qrs.length;
         document.getElementById('stat-url').textContent      = qrs.filter(q => q.type === 'URL').length;
