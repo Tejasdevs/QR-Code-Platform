@@ -100,10 +100,20 @@ export const GeneratorPage = {
         let currentQRId      = '';
         let hasGeneratedQr   = false;
 
+        const getRequestedType = () => {
+            const query = (window.location.hash.split('?')[1] || '').split('#')[0];
+            const params = new URLSearchParams(query);
+            const type = params.get('type');
+            return Object.prototype.hasOwnProperty.call(inputTemplates, type) ? type : 'URL';
+        };
+
         const renderInputs = (type) => {
             dynamicInputs.innerHTML = inputTemplates[type] || '';
         };
-        renderInputs('URL');
+        const initialType = getRequestedType();
+        const initialTypeInput = document.querySelector(`input[name="qr_type"][value="${initialType}"]`);
+        if (initialTypeInput) initialTypeInput.checked = true;
+        renderInputs(initialType);
 
         document.querySelectorAll('input[name="qr_type"]').forEach(radio => {
             radio.addEventListener('change', e => renderInputs(e.target.value));
