@@ -1,1 +1,2 @@
 [0618/134502.260:ERROR:registration_protocol_win.cc(108)] CreateFile: Access is denied. (0x5)
+[0623/140058.896:ERROR:registration_protocol_win.cc(108)] CreateFile: Access is denied. (0x5)

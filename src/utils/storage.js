@@ -218,6 +218,24 @@ export const auth = {
         storage.remove('currentUser');
         sessionStorageApi.remove('currentUser');
     },
+    deleteAccount: () => {
+        const currentUser = auth.getCurrentUser();
+        if (!currentUser || !currentUser.email) {
+            throw new Error('Please log in again to delete your account.');
+        }
+
+        const email = auth.normalizeEmail(currentUser.email);
+        const users = auth.getUsers();
+        const nextUsers = users.filter(user => user.email !== email);
+
+        if (nextUsers.length === users.length) {
+            throw new Error('Account not found. Please sign up again.');
+        }
+
+        storage.set('users', nextUsers);
+        auth.logout();
+        return true;
+    },
     getCurrentUser: () => {
         const sessionUser = sessionStorageApi.get('currentUser');
         if (sessionUser && sessionUser.email) return sessionUser;

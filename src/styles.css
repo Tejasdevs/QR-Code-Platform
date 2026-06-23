@@ -1646,6 +1646,11 @@ body {
 .profile-logout-btn { display:inline-flex; align-items:center; justify-content:center; gap:0.45rem; min-height:2.8rem; padding:0.75rem 1.05rem; border:1px solid #fff; border-radius:0.7rem; background:#fff; color:#000; font-weight:900; cursor:pointer; transition:transform .18s ease, background .18s ease, border-color .18s ease; }
 .profile-logout-btn:hover { background:#e5e7eb; border-color:#e5e7eb; transform:translateY(-1px); }
 .profile-logout-btn:active { transform:translateY(0); }
+.profile-delete-account-btn { flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; gap:0.45rem; min-width:10.25rem; min-height:2.8rem; padding:0.75rem 1.05rem; border:1px solid #fff; border-radius:0.7rem; background:#fff; color:#000; font-weight:900; white-space:nowrap; cursor:pointer; transition:transform .18s ease, background .18s ease, border-color .18s ease; }
+.profile-delete-account-btn:hover { background:#e5e7eb; border-color:#e5e7eb; transform:translateY(-1px); }
+.profile-delete-account-btn:active { transform:translateY(0); }
+.delete-account-confirm { background:#ef4444; color:#fff; border-color:#ef4444; }
+.delete-account-confirm:hover { background:#dc2626; border-color:#dc2626; }
 
 @media (max-width: 640px) {
     .profile-page { padding:0.5rem 0 2rem; }
@@ -1653,7 +1658,8 @@ body {
     .profile-info-row { align-items:flex-start; flex-direction:column; gap:0.35rem; }
     .profile-info-row strong { text-align:left; white-space:normal; }
     .profile-action-card { flex-direction:column; align-items:stretch; padding:1rem; }
-    .profile-logout-btn { width:100%; }
+    .profile-logout-btn,
+    .profile-delete-account-btn { width:100%; }
 }
 
 /* ===== Signup page uses auth styles (reuse) ===== */
