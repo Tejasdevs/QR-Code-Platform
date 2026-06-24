@@ -74,11 +74,43 @@ export const SettingsPage = {
             }
         });
 
-        document.getElementById('clear-data-btn').addEventListener('click', () => {
-            if (confirm('This will delete ALL your QR codes and history. Are you sure?')) {
-                localStorage.removeItem('qrflow_qrs');
-                localStorage.removeItem('qrflow_history');
-                showToast('All QR data cleared.', 'success');
+        const clearDataBtn = document.getElementById('clear-data-btn');
+        const clearDataModal = document.getElementById('clear-data-confirm-modal');
+        const confirmClearDataBtn = document.getElementById('confirm-clear-data-btn');
+        let clearDataModalCloseTimer;
+        const closeClearDataModal = () => {
+            clearDataModal.classList.remove('is-open');
+            window.clearTimeout(clearDataModalCloseTimer);
+            clearDataModalCloseTimer = setTimeout(() => {
+                clearDataModal.classList.add('hidden');
+                clearDataBtn.focus();
+            }, 180);
+        };
+        const openClearDataModal = () => {
+            window.clearTimeout(clearDataModalCloseTimer);
+            clearDataModal.classList.remove('hidden');
+            requestAnimationFrame(() => {
+                clearDataModal.classList.add('is-open');
+                confirmClearDataBtn.focus();
+            });
+        };
+
+        clearDataBtn.addEventListener('click', openClearDataModal);
+
+        clearDataModal.querySelectorAll('[data-clear-data-cancel]').forEach(button => {
+            button.addEventListener('click', closeClearDataModal);
+        });
+
+        confirmClearDataBtn.addEventListener('click', () => {
+            localStorage.removeItem('qrflow_qrs');
+            localStorage.removeItem('qrflow_history');
+            showToast('All QR data cleared.', 'success');
+            closeClearDataModal();
+        });
+
+        clearDataModal.addEventListener('keydown', e => {
+            if (e.key === 'Escape' && clearDataModal.classList.contains('is-open')) {
+                closeClearDataModal();
             }
         });
     }

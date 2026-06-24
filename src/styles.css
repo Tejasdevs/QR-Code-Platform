@@ -1617,6 +1617,23 @@ body {
 .danger-btn:active { background:#d1d5db; border-color:#d1d5db; transform:translateY(1px); }
 .settings-msg { display:none; margin-top:1rem; padding:0.75rem; border-radius:0.75rem; color:#10b981; background: rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.12); }
 .settings-msg.visible { display:block; }
+.clear-data-modal { position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:1rem; opacity:0; pointer-events:none; transition:opacity .18s ease; }
+.clear-data-modal.hidden { display:none; }
+.clear-data-modal.is-open { opacity:1; pointer-events:auto; }
+.clear-data-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.72); backdrop-filter:blur(8px); }
+.clear-data-modal-card { position:relative; width:min(100%,26rem); padding:1.25rem; border:1px solid rgba(255,255,255,0.14); border-radius:0.85rem; background:#000; color:#fff; box-shadow:0 24px 70px rgba(0,0,0,0.48); transform:translateY(10px) scale(0.98); transition:transform .18s ease; }
+.clear-data-modal.is-open .clear-data-modal-card { transform:translateY(0) scale(1); }
+.clear-data-modal-card h2 { margin:0; color:#fff; font-size:1.25rem; line-height:1.2; font-weight:900; }
+.clear-data-modal-card p { margin:0.65rem 0 0; color:rgba(255,255,255,0.68); line-height:1.55; }
+.clear-data-modal-actions { display:flex; justify-content:flex-end; gap:0.65rem; margin-top:1.25rem; }
+.clear-data-modal-cancel,
+.clear-data-modal-confirm { min-height:2.55rem; padding:0.65rem 1rem; border-radius:0.65rem; font-weight:850; cursor:pointer; transition:background-color .15s ease, border-color .15s ease, transform .15s ease; }
+.clear-data-modal-cancel { background:transparent; color:#fff; border:1px solid rgba(255,255,255,0.22); }
+.clear-data-modal-cancel:hover { background:rgba(255,255,255,0.08); }
+.clear-data-modal-confirm { background:#fff; color:#000; border:1px solid #fff; }
+.clear-data-modal-confirm:hover { background:#e5e7eb; border-color:#e5e7eb; }
+.clear-data-modal-confirm:active,
+.clear-data-modal-cancel:active { transform:translateY(1px); }
 
 @media (max-width: 640px) {
     .settings-wrap { padding:0.5rem 0 2rem; }
@@ -1629,6 +1646,10 @@ body {
     .settings-preview { align-items:flex-start; flex-direction:column; }
     .danger-box { align-items:flex-start; flex-direction:column; }
     .preview-box { width:5.5rem; height:5.5rem; }
+    .clear-data-modal-card { padding:1rem; }
+    .clear-data-modal-actions { flex-direction:column-reverse; }
+    .clear-data-modal-cancel,
+    .clear-data-modal-confirm { width:100%; }
 }
 
 .profile-page { width:min(100%,46rem); margin:0; padding:1rem clamp(1rem, 2vw, 2rem) 2.5rem; }

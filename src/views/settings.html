@@ -84,3 +84,15 @@
         <div id="settings-msg" class="settings-msg" role="alert"></div>
     </div>
 </div>
+
+<div id="clear-data-confirm-modal" class="clear-data-modal hidden" role="dialog" aria-modal="true" aria-labelledby="clear-data-modal-title" aria-describedby="clear-data-modal-message">
+    <div class="clear-data-modal-backdrop" data-clear-data-cancel></div>
+    <div class="clear-data-modal-card">
+        <h2 id="clear-data-modal-title">Clear all data?</h2>
+        <p id="clear-data-modal-message">This will delete all your QR codes and history. This action cannot be undone.</p>
+        <div class="clear-data-modal-actions">
+            <button type="button" class="clear-data-modal-cancel" data-clear-data-cancel>Cancel</button>
+            <button type="button" id="confirm-clear-data-btn" class="clear-data-modal-confirm">Clear Data</button>
+        </div>
+    </div>
+</div>
