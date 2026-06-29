@@ -136,19 +136,26 @@ export const auth = {
         }
 
         const users = auth.getUsers();
-        const user = users.find(u =>
+        const userIndex = users.findIndex(u =>
             u.email === normalizedEmail &&
             u.password === enteredPassword
         );
+        const user = users[userIndex];
 
         if (!user) {
             throw new Error('Invalid email or password');
         }
 
+        if (!user.createdAt) {
+            user.createdAt = new Date().toISOString();
+            users[userIndex] = user;
+            storage.set('users', users);
+        }
+
         const currentUser = {
             name: user.name,
             email: auth.normalizeEmail(user.email),
-            createdAt: user.createdAt || null,
+            createdAt: user.createdAt,
             authenticatedAt: new Date().toISOString(),
             rememberMe: !!rememberMe
         };
@@ -238,15 +245,32 @@ export const auth = {
     },
     getCurrentUser: () => {
         const sessionUser = sessionStorageApi.get('currentUser');
-        if (sessionUser && sessionUser.email) return sessionUser;
+        if (sessionUser && sessionUser.email) return auth.ensureCreatedAt(sessionUser, sessionStorageApi);
 
         const persistentUser = storage.get('currentUser');
         if (persistentUser && persistentUser.email && persistentUser.rememberMe === true) {
-            return persistentUser;
+            return auth.ensureCreatedAt(persistentUser, storage);
         }
 
         if (persistentUser) storage.remove('currentUser');
         return null;
+    },
+    ensureCreatedAt: (currentUser, sessionApi) => {
+        if (currentUser.createdAt) return currentUser;
+
+        const email = auth.normalizeEmail(currentUser.email);
+        const users = auth.getUsers();
+        const userIndex = users.findIndex(user => user.email === email);
+        const fixedCreatedAt = users[userIndex]?.createdAt || currentUser.authenticatedAt || new Date().toISOString();
+
+        if (userIndex !== -1 && !users[userIndex].createdAt) {
+            users[userIndex] = { ...users[userIndex], createdAt: fixedCreatedAt };
+            storage.set('users', users);
+        }
+
+        const updatedCurrentUser = { ...currentUser, createdAt: fixedCreatedAt };
+        sessionApi.set('currentUser', updatedCurrentUser);
+        return updatedCurrentUser;
     },
     isAuthenticated: () => {
         const currentUser = auth.getCurrentUser();

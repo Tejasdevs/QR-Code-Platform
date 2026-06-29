@@ -21,7 +21,7 @@ export const ProfilePage = {
 
         const user = auth.getCurrentUser() || {};
         const name = user.name || 'User';
-        const joinedDate = user.createdAt || user.authenticatedAt;
+        const joinedDate = user.createdAt;
 
         document.getElementById('profile-avatar').textContent = name.charAt(0).toUpperCase();
         document.getElementById('profile-name').textContent = name;
