@@ -22,7 +22,12 @@
                 </div>
                 <div class="form-row">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" id="password" required autocomplete="new-password" class="form-input" placeholder="Min. 6 characters">
+                    <div class="password-field">
+                        <input type="password" id="password" required autocomplete="new-password" class="form-input" placeholder="Min. 6 characters">
+                        <button type="button" id="password-toggle" class="password-toggle" aria-label="Show password" aria-pressed="false">
+                            <i class="ph ph-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <button type="submit" class="primary-btn auth-submit">
                     Create Account <i class="ph ph-arrow-right"></i>
