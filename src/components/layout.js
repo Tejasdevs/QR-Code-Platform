@@ -68,7 +68,7 @@ export const setupLayoutEvents = () => {
 
     document.addEventListener('keydown', window.__scanifyLogoutKeyHandler);
 
-    ['profile-logout-btn'].forEach(id => {
+    ['profile-logout-btn', 'sidebar-logout-btn'].forEach(id => {
         const btn = document.getElementById(id);
         if (btn) btn.addEventListener('click', (e) => {
             e.preventDefault();

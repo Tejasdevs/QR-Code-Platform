@@ -1724,6 +1724,10 @@ body {
 .sidebar-avatar { width:2rem; height:2rem; border-radius:999px; display:flex; align-items:center; justify-content:center; font-weight:700; color:#fff; background:linear-gradient(135deg,#3b82f6,#8b5cf6); box-shadow:0 8px 20px rgba(59,130,246,0.08); }
 .sidebar-user { flex:1; overflow:hidden; }
 .sidebar-name { color:#fff; font-size:0.9rem; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sidebar-logout-btn { width:2.25rem; height:2.25rem; flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center; border:1px solid rgba(255,255,255,0.12); border-radius:0.65rem; background:rgba(255,255,255,0.04); color:#fff; cursor:pointer; transition:background-color .16s ease, border-color .16s ease, transform .16s ease; }
+.sidebar-logout-btn:hover { background:rgba(255,255,255,0.10); border-color:rgba(255,255,255,0.24); transform:translateY(-1px); }
+.sidebar-logout-btn:active { transform:translateY(0); }
+.sidebar-logout-btn:focus-visible { outline:2px solid rgba(255,255,255,0.7); outline-offset:2px; }
 
 /* Logout confirmation modal */
 .logout-modal { position:fixed; inset:0; z-index:1000; display:flex; align-items:center; justify-content:center; padding:1rem; opacity:0; pointer-events:none; transition:opacity .18s ease; }
