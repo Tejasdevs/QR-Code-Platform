@@ -40,12 +40,61 @@ const showHttpRequiredMessage = () => {
         </div>`;
 };
 
+const initSmoothWheelScrolling = () => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const scrollTargets = '.page-main, .sidebar-nav, .mobile-sidebar-nav';
+    const state = new WeakMap();
+
+    const getScrollTarget = (eventTarget) => {
+        const element = eventTarget instanceof Element ? eventTarget : eventTarget?.parentElement;
+        return element?.closest(scrollTargets) || document.scrollingElement;
+    };
+
+    const animateScroll = (target, from, to, startedAt, duration) => {
+        const progress = Math.min((performance.now() - startedAt) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        target.scrollTop = from + (to - from) * eased;
+
+        if (progress < 1) {
+            const entry = state.get(target);
+            entry.frame = requestAnimationFrame(() => animateScroll(target, from, to, startedAt, duration));
+        } else {
+            state.delete(target);
+        }
+    };
+
+    document.addEventListener('wheel', (event) => {
+        if (event.ctrlKey || event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY)) return;
+        if (event.deltaMode !== WheelEvent.DOM_DELTA_PIXEL || Math.abs(event.deltaY) < 40) return;
+
+        const target = getScrollTarget(event.target);
+        if (!target) return;
+
+        const maxScroll = target.scrollHeight - target.clientHeight;
+        if (maxScroll <= 0) return;
+
+        const current = target.scrollTop;
+        const next = Math.max(0, Math.min(maxScroll, current + event.deltaY * 0.9));
+        if (next === current) return;
+
+        event.preventDefault();
+
+        const previous = state.get(target);
+        if (previous?.frame) cancelAnimationFrame(previous.frame);
+
+        state.set(target, {});
+        animateScroll(target, current, next, performance.now(), 280);
+    }, { passive: false });
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     if (window.location.protocol === 'file:') {
         showHttpRequiredMessage();
         return;
     }
 
+    initSmoothWheelScrolling();
     applyTheme();
 
     const routes = [
