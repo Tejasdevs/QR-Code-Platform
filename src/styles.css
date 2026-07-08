@@ -1481,7 +1481,11 @@ body {
 }
 
 /* ===== Auth / Login page styles ===== */
-.auth-page { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; background:#000; color:#fff; }
+.auth-page { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:2rem; background:#000; color:#fff; position:relative; }
+.auth-home-link { position:fixed; top:1.5rem; right:1.5rem; z-index:10; display:inline-flex; align-items:center; justify-content:center; gap:0.45rem; min-height:2.65rem; padding:0.7rem 0.95rem; border:1px solid #fff; border-radius:0.65rem; background:#fff; color:#000; font-size:0.88rem; font-weight:850; line-height:1; text-decoration:none; transition:background-color .18s ease, border-color .18s ease, transform .18s ease; }
+.auth-home-link i { color:#000; font-size:1rem; line-height:1; }
+.auth-home-link:hover,
+.auth-home-link:focus-visible { background:#e5e7eb; border-color:#e5e7eb; outline:none; transform:translateY(-1px); }
 .auth-card { width:100%; max-width:30rem; border-radius:0.85rem; overflow:hidden; box-shadow:none; border:1px solid rgba(255,255,255,0.12); background:#000 !important; }
 .auth-card-inner { padding:2.75rem 2.75rem 2.5rem; position:relative; }
 .brand-block { text-align:left; margin-bottom:2rem; }
@@ -1545,7 +1549,13 @@ body {
 
 @media (max-width: 560px) {
     .auth-page {
-        padding: 1rem;
+        padding: 5rem 1rem 1rem;
+        align-items: flex-start;
+    }
+
+    .auth-home-link {
+        top: 1rem;
+        right: 1rem;
     }
 
     .auth-card-inner {
