@@ -1760,6 +1760,25 @@ body {
 .logout-modal-cancel:hover { background:rgba(255,255,255,0.08); }
 .logout-modal-confirm { background:#fff; color:#000; border:1px solid #fff; }
 .logout-modal-confirm:hover { background:#e5e7eb; }
+#delete-account-confirm-modal .logout-modal-card {
+    overflow:hidden;
+    border-color:rgba(239,68,68,0.22);
+    background:linear-gradient(180deg, rgba(127,29,29,0.12) 0%, rgba(69,10,10,0.04) 30%, #000 100%);
+    box-shadow:0 24px 70px rgba(0,0,0,0.48), 0 0 0 1px rgba(239,68,68,0.04);
+}
+#delete-account-confirm-modal .logout-modal-card::before {
+    content:"";
+    position:absolute;
+    inset:0 0 auto;
+    height:0.18rem;
+    background:rgba(239,68,68,0.68);
+}
+#delete-account-confirm-modal .logout-modal-card h2 {
+    color:#fff;
+}
+#delete-account-confirm-modal .logout-modal-card p {
+    color:rgba(255,255,255,0.68);
+}
 
 @media (max-width: 520px) {
     .logout-modal-card { padding:1rem; }
