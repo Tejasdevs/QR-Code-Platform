@@ -1,155 +1,424 @@
 # Scanify
 
-Scanify is a clean, dark-themed QR code platform for generating, saving, managing, sharing, and organizing QR codes directly in the browser.
+> A clean, modern QR code platform for generating, managing, organizing, and sharing QR codes directly from the browser.
 
-The project is currently frontend-only and uses browser storage for authentication sessions, QR data, history, favorites, settings, and scan-related data.
+**Scanify** is a frontend-first QR code management platform built with HTML, CSS, and JavaScript. It provides a complete dashboard experience for creating and organizing QR codes, managing favorites and history, customizing settings, and tracking local scan-related activity.
 
-## Important Note
+The current version is **frontend-only** and uses browser storage for local data persistence. A production backend is planned for future versions.
 
-This project does not have a backend yet.
+---
 
-All data is stored in the user's browser. Persistent app data is stored with localStorage, and temporary login sessions use sessionStorage when Remember Me is not enabled. That means accounts, QR codes, favorites, history, settings, and scan data are local to the current browser/device.
+## ✨ Features
 
-Backend integration is planned for the future. A backend will later be added for real user accounts, database storage, real scan analytics, secure authentication, and cross-device data sync.
+### 🔐 Authentication
 
-## Features
+* User signup and login
+* Remember Me functionality
+* Protected dashboard routes
+* Browser-based session management
+* Password change flow
+* Logout functionality
 
-- User signup and login flow
-- Remember Me login sessions
-- Protected dashboard pages
-- Dashboard profile avatar shortcut
-- QR code generator
-- Supported QR types:
-  - URL
-  - Text
-  - WhatsApp
-  - WiFi
-- Manage saved QR codes
-- QR preview and download
-- Share QR codes using the Web Share API where supported
-- Favorites page for important QR codes
-- History page for activity logs
-- Profile page with user information
-- Settings page for default QR color and password changes
-- Help and FAQ section
-- Toast notifications for clean success/error feedback
-- Responsive dark UI
+### 📱 QR Code Generator
 
-## Pages
+Generate QR codes for:
 
-- Landing page
-- Login
-- Signup
-- Dashboard
-- Create QR
-- My QR Codes
-- Favorites
-- Track
-- History
-- Profile
-- Help and FAQ
-- Settings
+* 🔗 URL
+* 📝 Text
+* 💬 WhatsApp
+* 📶 WiFi
 
-## Tech Stack
+Additional functionality includes:
 
-- HTML
-- CSS
-- JavaScript
-- ES Modules
-- localStorage
-- sessionStorage
-- Phosphor Icons
-- QRCode.js
+* Live QR preview
+* Custom QR color
+* Download QR codes
+* Save generated QR codes
+* Share QR codes using the Web Share API where supported
 
-## Local Setup
+### 📂 QR Management
 
-This app must be served through a local HTTP server. Opening `index.html` directly with `file://` will not work because the app loads views using `fetch()`.
+* View saved QR codes
+* Organize generated QR codes
+* Favorite important QR codes
+* Delete QR codes
+* Preview saved QR codes
+* Download saved QR codes
 
-### Option 1: Node.js
+### 📊 Tracking & History
 
-Install dependencies:
+* Local scan-related records
+* Activity history
+* QR-related activity logs
+* History management
+
+> **Note:** Real-world scan analytics are not available yet because Scanify currently does not have a backend.
+
+### 👤 Profile & Settings
+
+* User profile
+* Profile avatar shortcut
+* Default QR color settings
+* Password update functionality
+* Application preferences
+
+### ❓ Help & FAQ
+
+* Built-in help section
+* Frequently asked questions
+* User-friendly guidance for using Scanify
+
+### 🎨 UI & UX
+
+* Modern dark-themed interface
+* Responsive design
+* Clean dashboard layout
+* Toast notifications
+* Mobile-friendly interface
+* Phosphor Icons
+* Consistent component-based UI structure
+
+---
+
+## 🖥️ Pages
+
+| Page        | Description                          |
+| ----------- | ------------------------------------ |
+| Landing     | Scanify introduction and entry point |
+| Login       | User authentication                  |
+| Signup      | New user registration                |
+| Dashboard   | Main application dashboard           |
+| Create QR   | QR code generation                   |
+| My QR Codes | Saved QR code management             |
+| Favorites   | Favorite QR codes                    |
+| Track       | Local scan/tracking section          |
+| History     | Activity history                     |
+| Profile     | User profile                         |
+| Help & FAQ  | Help and frequently asked questions  |
+| Settings    | Application and account settings     |
+
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* ES Modules
+
+### Browser APIs & Storage
+
+* `localStorage`
+* `sessionStorage`
+* Web Share API
+
+### Libraries
+
+* [QRCode.js](https://github.com/davidshimjs/qrcodejs)
+* [Phosphor Icons](https://phosphoricons.com/)
+
+### Development
+
+* Node.js
+* npm
+* Git
+* GitHub
+
+---
+
+## 📁 Project Structure
+
+```text
+Scanify/
+│
+├── src/
+│   ├── components/
+│   │   └── Shared layout and reusable UI logic
+│   │
+│   ├── pages/
+│   │   └── Page-specific JavaScript
+│   │
+│   ├── utils/
+│   │   ├── Router utilities
+│   │   ├── Storage utilities
+│   │   ├── Toast utilities
+│   │   └── Tracking utilities
+│   │
+│   ├── views/
+│   │   └── HTML views loaded by the router
+│   │
+│   └── styles.css
+│
+├── index.html
+├── package.json
+├── serve.ps1
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have:
+
+* Node.js installed
+* npm installed
+* Git installed
+
+### 1. Clone the repository
+
+```bash
+git clone <YOUR_REPOSITORY_URL>
+```
+
+### 2. Navigate into the project
+
+```bash
+cd Scanify
+```
+
+### 3. Install dependencies
 
 ```bash
 npm install
 ```
 
-Start the local server:
+### 4. Start the development server
 
 ```bash
 npm start
 ```
 
-Open:
+Then open:
 
 ```text
 http://localhost:3000
 ```
 
-### Option 2: PowerShell Server
+---
 
-From the project root:
+## ⚠️ Why a Local Server Is Required
+
+Scanify uses JavaScript `fetch()` requests to dynamically load application views.
+
+Therefore, opening:
+
+```text
+file://...
+```
+
+directly in the browser will not work correctly.
+
+Use the provided local server instead:
+
+```bash
+npm start
+```
+
+Alternatively, on PowerShell:
 
 ```powershell
 ./serve.ps1
 ```
 
-Then open the URL shown in the terminal.
+---
 
-## Project Structure
+## 💾 Data Storage
 
-```text
-src/
-  components/     Shared layout logic
-  pages/          Page-specific JavaScript
-  utils/          Router, storage, toast, tracking helpers
-  views/          HTML views loaded by the router
-  styles.css      Main styling
-index.html        App entry point
-package.json      Local server scripts
-serve.ps1         PowerShell local server
+The current version of Scanify stores application data locally in the user's browser.
+
+Stored information includes:
+
+* Registered users
+* Current login session
+* Generated QR codes
+* Favorite QR codes
+* Activity history
+* Application settings
+* Local scan records
+
+### localStorage
+
+Persistent application data is stored using:
+
+```javascript
+localStorage
 ```
 
-## Data Storage
+This allows data to remain available after closing and reopening the browser.
 
-Scanify currently stores data in browser storage. Main stored data includes:
+### sessionStorage
 
-- Registered users
-- Current logged-in user session
-- Generated QR codes
-- Favorite QR codes
-- Activity history
-- App settings
-- Local scan records
+When **Remember Me** is disabled, the temporary login session uses:
 
-Account security:
+```javascript
+sessionStorage
+```
 
-- Users can change their password from Settings.
-- Password updates validate the current password, new password length, and confirmation match.
-- Updated passwords are stored locally with the browser-based account data.
+The session ends when the browser session is closed.
 
-Remember Me behavior:
+---
 
-- Enabled: the user session is stored persistently and remains active until manual logout.
-- Disabled: the user session is temporary and ends when the browser session closes.
+## 🔐 Authentication Note
 
-Because there is no backend yet, clearing browser data will remove saved Scanify data from that browser.
+The current authentication system is designed for **frontend demonstration and learning purposes**.
 
-## Upcoming Backend Plan
+Because Scanify does not currently have a backend:
 
-The backend will be integrated later. Planned backend improvements include:
+* User accounts are stored locally
+* Password data is stored with browser-based application data
+* Authentication is not suitable for production security
+* Accounts do not sync between devices
+* Clearing browser storage can remove account/application data
 
-- Secure authentication
-- User database
-- Cloud-saved QR codes
-- Real scan tracking
-- Cross-device access
-- Better analytics
-- Account management
+**Do not use real or sensitive passwords with the current frontend-only version.**
 
-## Author
+A secure backend authentication system is planned for the production architecture.
 
-Built by Tejas Chamola.
+---
 
-## License
+## ☁️ Planned Backend Architecture
 
-This project is for learning and portfolio use.
+The next major version of Scanify will introduce a backend and database.
+
+Planned improvements include:
+
+* Secure user authentication
+* Database-backed user accounts
+* Cloud QR code storage
+* Cross-device synchronization
+* Real QR scan tracking
+* Analytics dashboard
+* Secure password hashing
+* Server-side authorization
+* Account management
+* Persistent user profiles
+
+The backend will replace the current browser-only storage architecture.
+
+---
+
+## 📈 Future Roadmap
+
+### Phase 1 — Frontend
+
+* [x] QR generation
+* [x] Authentication UI
+* [x] Dashboard
+* [x] QR management
+* [x] Favorites
+* [x] History
+* [x] Settings
+* [x] Profile
+* [x] Help & FAQ
+* [x] Responsive UI
+
+### Phase 2 — Backend
+
+* [ ] Backend API
+* [ ] Database
+* [ ] Secure authentication
+* [ ] Password hashing
+* [ ] Server-side sessions/JWT
+* [ ] Cloud QR storage
+
+### Phase 3 — Analytics
+
+* [ ] Real scan tracking
+* [ ] Scan analytics
+* [ ] Device analytics
+* [ ] Location analytics
+* [ ] QR performance dashboard
+
+### Phase 4 — Production
+
+* [ ] Cross-device synchronization
+* [ ] Account recovery
+* [ ] Production security hardening
+* [ ] Advanced QR customization
+* [ ] Custom QR branding
+
+---
+
+## 🌐 Deployment
+
+Scanify can be deployed as a static frontend application on platforms such as:
+
+* Vercel
+* Netlify
+* GitHub Pages
+* Other static hosting providers
+
+For the current frontend-only version, no backend server is required after deployment.
+
+---
+
+## 🔎 SEO & Production Readiness
+
+The production release will include SEO and discoverability improvements such as:
+
+* Descriptive page title
+* Meta description
+* Canonical URL
+* Open Graph metadata
+* Social sharing metadata
+* `robots.txt`
+* `sitemap.xml`
+* Semantic HTML
+* Structured data where appropriate
+* Optimized page performance
+* Mobile-friendly responsive design
+
+> The application dashboard itself is primarily an interactive web application, so SEO efforts should focus mainly on the public landing page and other crawlable public content rather than private dashboard routes.
+
+---
+
+## 🧪 Browser Compatibility
+
+Scanify is designed for modern browsers supporting:
+
+* ES Modules
+* Local Storage
+* Session Storage
+* Fetch API
+* Web Share API where available
+
+The Web Share functionality may not be available in every browser. Scanify falls back gracefully where the API is unsupported.
+
+---
+
+## 👨‍💻 Author
+
+**Tejas Chamola**
+
+Computer Science Engineering Student & Full-Stack Developer
+
+---
+
+## 📄 License
+
+This project is created for **learning, experimentation, and portfolio purposes**.
+
+You are welcome to explore the source code and use it as a reference for learning frontend application architecture.
+
+---
+
+## ⭐ Project Status
+
+**Current Status:** Frontend MVP / Portfolio Project
+
+**Backend:** Planned
+
+**Database:** Planned
+
+**Real Scan Analytics:** Planned
+
+**Cross-device Sync:** Planned
+
+---
+
+> Built with ❤️ by **Tejas Chamola**
