@@ -127,11 +127,46 @@ Describe whether the update worked correctly.
 - ✅ Completed
 - 🟡 In Progress
 - ❌ Needs Improvement
+---
+
+## September 3, 2026 — Knowledge Base Expansion
+
+### What Was Added
+
+Expanded the Scanify AI Chatbot Knowledge Base after analyzing the website.
+
+### Knowledge Base Changes
+
+* Account & password reset guidance
+* Dashboard, Profile & Settings
+* QR generation & management
+* Favorites, History & Tracking
+* Storage & authentication limitations
+* Help & FAQ
+* Current vs planned features
+* Security & unsupported-feature handling
+
+### Testing
+
+* Tested QR, account, password and FAQ questions.
+* Verified unsupported information is not hallucinated.
+
+### Result
+
+Improved chatbot support coverage and Knowledge Base accuracy.
+
+### Status
+
+✅ Completed
 
 ---
 
 # Version History
 
-| Version | Date | Description | Status |
-|---|---|---|---|
-| v0.1 | September 3, 2026 | Initial AI chatbot and Basic Instructions | ✅ |
+| Version | Date              | Description                                                        | Status |
+| ------- | ----------------- | ------------------------------------------------------------------ | ------ |
+| v0.1    | September 3, 2026 | Initial AI chatbot and Basic Instructions                          | ✅      |
+| v0.2    | September 3, 2026 | Expanded Knowledge Base, website analysis, FAQs & account guidance | ✅      |
+
+
+|
