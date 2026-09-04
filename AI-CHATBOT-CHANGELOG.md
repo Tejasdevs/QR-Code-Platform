@@ -20,6 +20,7 @@ The Scanify AI Chatbot is designed to provide users with friendly, accurate, and
 * Beginner-friendly explanations
 * Human escalation when information is unavailable
 * User language and tone matching
+* Conversation history and continuity
 
 ---
 
@@ -149,6 +150,44 @@ The chatbot now responds in the same language and tone as the user.
 
 ---
 
+## September 4, 2026 — Conversation History
+
+### What Was Added
+
+Added **Conversation History** functionality to the Scanify AI Chatbot.
+
+Users can now:
+
+* View their previous chatbot conversations
+* Access earlier conversations
+* Continue a previous conversation
+* Resume support discussions without starting from the beginning
+
+### Feature Changes
+
+* Added support for viewing previous conversations.
+* Added support for continuing existing conversations.
+* Improved conversation continuity.
+* Reduced the need for users to repeat information from previous conversations.
+* Improved the overall chatbot user experience.
+
+### Testing
+
+* Tested viewing previous conversations.
+* Tested opening an existing conversation.
+* Tested continuing a previous conversation.
+* Verified that the conversation can be resumed successfully.
+
+### Result
+
+The chatbot now provides a more continuous support experience by allowing users to **view and continue previous conversations**.
+
+### Status
+
+✅ Completed
+
+---
+
 # Update Format
 
 Future updates should follow this structure:
@@ -185,8 +224,9 @@ Describe whether the update worked correctly.
 
 # Version History
 
-| Version | Date              | Description                                                              | Status |
-| ------- | ----------------- | ------------------------------------------------------------------------ | ------ |
-| v0.1    | September 3, 2026 | Initial AI chatbot and Basic Instructions                                | ✅      |
-| v0.2    | September 3, 2026 | Expanded Knowledge Base, website analysis, FAQs & account guidance       | ✅      |
-| v0.3    | September 4, 2026 | Added automatic language and tone matching for English, Hindi & Hinglish | ✅      |
+| Version | Date              | Description                                                                    | Status |
+| ------- | ----------------- | ------------------------------------------------------------------------------ | ------ |
+| v0.1    | September 3, 2026 | Initial AI chatbot and Basic Instructions                                      | ✅      |
+| v0.2    | September 3, 2026 | Expanded Knowledge Base, website analysis, FAQs & account guidance             | ✅      |
+| v0.3    | September 4, 2026 | Added automatic language and tone matching for English, Hindi & Hinglish       | ✅      |
+| v0.4    | September 4, 2026 | Added Conversation History with previous conversation viewing and continuation | ✅      |
