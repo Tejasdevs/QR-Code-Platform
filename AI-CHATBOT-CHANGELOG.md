@@ -21,6 +21,7 @@ The Scanify AI Chatbot is designed to provide users with friendly, accurate, and
 * Human escalation when information is unavailable
 * User language and tone matching
 * Conversation history and continuity
+* File upload and sharing support
 
 ---
 
@@ -188,6 +189,41 @@ The chatbot now provides a more continuous support experience by allowing users 
 
 ---
 
+## September 6, 2026 — File Upload Support
+
+### What Was Added
+
+Added **File Upload** functionality to the Scanify AI Chatbot.
+
+Users can now:
+
+* Upload files directly in the chat conversation.
+* Share files with the chatbot.
+* Provide relevant files as additional context during a support conversation.
+
+### Feature Changes
+
+* Added support for file uploads within chat.
+* Enabled users to share relevant files during conversations.
+* Improved the ability to provide additional context through shared files.
+* Improved the overall chatbot interaction and support experience.
+
+### Testing
+
+* Tested uploading files in the chatbot.
+* Tested sharing uploaded files within a conversation.
+* Verified that uploaded files can be shared successfully in the chat experience.
+
+### Result
+
+The chatbot now allows users to **upload and share files directly within the chat conversation**, making support interactions more flexible and contextual.
+
+### Status
+
+✅ Completed
+
+---
+
 # Update Format
 
 Future updates should follow this structure:
@@ -224,9 +260,10 @@ Describe whether the update worked correctly.
 
 # Version History
 
-| Version | Date              | Description                                                                    | Status |
-| ------- | ----------------- | ------------------------------------------------------------------------------ | ------ |
-| v0.1    | September 3, 2026 | Initial AI chatbot and Basic Instructions                                      | ✅      |
-| v0.2    | September 3, 2026 | Expanded Knowledge Base, website analysis, FAQs & account guidance             | ✅      |
-| v0.3    | September 4, 2026 | Added automatic language and tone matching for English, Hindi & Hinglish       | ✅      |
-| v0.4    | September 4, 2026 | Added Conversation History with previous conversation viewing and continuation | ✅      |
+| Version | Date              | Description                                                                         | Status |
+| ------- | ----------------- | ----------------------------------------------------------------------------------- | ------ |
+| v0.1    | September 3, 2026 | Initial AI chatbot and Basic Instructions                                           | ✅      |
+| v0.2    | September 3, 2026 | Expanded Knowledge Base, website analysis, FAQs & account guidance                  | ✅      |
+| v0.3    | September 4, 2026 | Added automatic language and tone matching for English, Hindi & Hinglish            | ✅      |
+| v0.4    | September 4, 2026 | Added Conversation History with previous conversation viewing and continuation      | ✅      |
+| v0.5    | September 6, 2026 | Added File Upload support for uploading and sharing files within chat conversations | ✅      |
