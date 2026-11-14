@@ -4,7 +4,7 @@
 
 **Scanify** is a frontend-first QR code management platform built with HTML, CSS, and JavaScript. It provides a complete dashboard experience for creating and organizing QR codes, managing favorites and history, customizing settings, and tracking local scan-related activity.
 
-The current version is **frontend-only** and uses browser storage for local data persistence. A production backend is planned for future updates and version 
+The current version is **frontend-only** and uses browser storage for local data persistence.
 
 ---
 
